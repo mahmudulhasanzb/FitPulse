@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import FeaturedSection from "@/components/FeaturedSection";
 import RevolutionSection from "@/components/RevolutionSection";
+import CTASection from "@/components/CTASection";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <Banner />
       <FeaturedSection />
       <RevolutionSection />
+      <CTASection />
     </>
   );
 }

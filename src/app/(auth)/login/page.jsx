@@ -36,6 +36,18 @@ export default function LoginPage() {
     })
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error('Google sign in failed');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0A0D02] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 text-white font-sans antialiased">
       <div className="w-full max-w-[480px] bg-[#0E1106]/70 border border-[#1C210E] rounded-3xl p-8 md:p-10 shadow-2xl backdrop-blur-md">
@@ -44,7 +56,7 @@ export default function LoginPage() {
           <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Sign In
           </h2>
-          F
+          
           <p className="text-[#A4A896]/60 text-sm mt-1.5 font-medium">
             Welcome back. Enter your credentials to access your dashboard.
           </p>
@@ -120,6 +132,7 @@ export default function LoginPage() {
 
           {/* Google Signup Button */}
           <button
+            onClick={handleGoogleSignIn}
             type="button"
             className="w-full bg-[#14180A] hover:bg-[#1C210E] border border-[#282F18] text-white font-extrabold text-xs uppercase py-3.5 rounded-xl cursor-pointer flex items-center justify-center gap-2.5 transition-all duration-200"
           >

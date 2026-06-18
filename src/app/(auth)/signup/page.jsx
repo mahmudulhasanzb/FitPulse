@@ -18,24 +18,20 @@ import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-export default function SignupPage() {
+export default  function SignupPage() {
   const router = useRouter();
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
   const fileInputRef = useRef(null);
-
+ 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm({
-    defaultValues: {
-      role: 'student',
-    },
-  });
+  } = useForm();
 
   // Watch password for real-time validation rules
   const passwordVal = watch('password', '');
@@ -79,19 +75,31 @@ export default function SignupPage() {
         name: data.name,
         email: data.email,
         password: data.password,
-        // role: role,
+        role: role,
         image: photoPreview || '',
       },
       {
         onSuccess: () => {
           toast.success('Account created successfully!');
-          router.push('/')
+          router.push('/');
         },
         onError: ({ error }) => {
           toast.error(error?.message || 'Registration failed');
         },
       },
     );
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error('Google sign in failed');
+    }
   };
 
   return (
@@ -342,6 +350,7 @@ export default function SignupPage() {
 
           {/* Google Signup Button */}
           <button
+            onClick={handleGoogleSignIn}
             type="button"
             className="w-full bg-[#14180A] hover:bg-[#1C210E] border border-[#282F18] text-white font-extrabold text-xs uppercase py-3.5 rounded-xl cursor-pointer flex items-center justify-center gap-2.5 transition-all duration-200"
           >

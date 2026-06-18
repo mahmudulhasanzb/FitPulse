@@ -12,9 +12,14 @@ import {
   EyeOff,
 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { uploadImage } from '@/utils/uploadImage';
+import { uploadImage } from '@/lib/uploadImage';
+import toast from 'react-hot-toast';
+import { authClient } from '@/lib/auth-client';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
+  const router = useRouter();
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -42,14 +47,24 @@ export default function SignupPage() {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = e => {
+  const handleFileChange = async e => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+      const toastId = toast.loading('Uploading profile photo...');
+      try {
+        const imageUrl = await uploadImage(file);
+        if (imageUrl) {
+          setPhotoPreview(imageUrl);
+          toast.success('Profile photo uploaded successfully!', {
+            id: toastId,
+          });
+        } else {
+          toast.error('Failed to upload photo.', { id: toastId });
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error('Failed to upload photo.', { id: toastId });
+      }
     }
   };
 
@@ -59,13 +74,24 @@ export default function SignupPage() {
   };
 
   const onSubmit = async data => {
-    const imageFile = data.image?.[0];
-    const imageUrl = await uploadImage(imageFile);
-    const finalData = {
-      ...data,
-      photoUrl: imageUrl,
-    };
-    console.log(finalData.imageUrl);
+    const { data: response, error } = await authClient.signUp.email(
+      {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        // role: role,
+        image: photoPreview || '',
+      },
+      {
+        onSuccess: () => {
+          toast.success('Account created successfully!');
+          router.push('/')
+        },
+        onError: ({ error }) => {
+          toast.error(error?.message || 'Registration failed');
+        },
+      },
+    );
   };
 
   return (
@@ -90,9 +116,12 @@ export default function SignupPage() {
                 className="w-full h-full rounded-full border border-dashed border-[#282F18] hover:border-[#D4FF00]/50 bg-[#14180A] flex items-center justify-center cursor-pointer group transition-all duration-300 overflow-hidden"
               >
                 {photoPreview ? (
-                  <img
+                  <Image
                     src={photoPreview}
-                    alt="Biometric Preview"
+                    alt="Profile Preview"
+                    width={96}
+                    height={96}
+                    unoptimized={true}
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -211,7 +240,7 @@ export default function SignupPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#A4A896]/50 hover:text-white cursor-pointer"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-black/50 hover:text-black cursor-pointer"
               >
                 {showPassword ? (
                   <EyeOff className="w-4 h-4" />
@@ -275,9 +304,24 @@ export default function SignupPage() {
           >
             {isSubmitting ? (
               <>
-                <svg className="animate-spin h-5 w-5 text-[#121212]" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                <svg
+                  className="animate-spin h-5 w-5 text-[#121212]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
                 </svg>
                 <span>Creating Account...</span>
               </>

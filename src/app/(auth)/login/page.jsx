@@ -4,8 +4,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { authClient } from '@/lib/auth-client';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -14,8 +18,22 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log(data);
+
+    const { data: response, error} = await authClient.signIn.email({
+      email: data.email,
+      password: data.password,
+    }, {
+      onSuccess: () => {
+        toast.success('Logedin successfully')
+        router.push("/")
+      },
+      onError: ({error}) => {
+        toast.error(error.message)
+        return
+      }
+    })
   };
 
   return (
@@ -66,7 +84,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#A4A896]/50 hover:text-white cursor-pointer"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2  text-black/50 hover:text-black cursor-pointer"
               >
                 {showPassword ? (
                   <EyeOff className="w-4 h-4" />

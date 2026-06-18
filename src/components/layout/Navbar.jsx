@@ -19,11 +19,7 @@ const Navbar = () => {
   ];
 
   // Helper to determine if link is active
-  // Default to '/forum' (Community Forum) active if on root or '/forum' to match the screenshot
   const isLinkActive = (href) => {
-    if (href === "/forum") {
-      return pathname === "/forum" || pathname === "/" || !navLinks.some(link => link.href === pathname);
-    }
     return pathname === href;
   };
 

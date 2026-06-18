@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Flame, ArrowRight, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import NumberTicker from './NumberTicker';
 
 // FlipWords component - splits words into letters and animates them with exit effects
 export const FlipWords = ({
@@ -285,7 +286,7 @@ const Banner = () => {
           >
             <div className="transition-transform duration-300 hover:translate-x-1">
               <div className="text-3xl md:text-4xl font-black text-white tracking-tight flex items-baseline gap-1">
-                <span>2.4M</span>
+                <NumberTicker value={2.4} decimalPlaces={1} suffix="M" />
                 <span className="text-primary text-xl md:text-2xl">+</span>
               </div>
               <div className="text-[10px] md:text-xs font-semibold text-neutral-light uppercase tracking-widest mt-1">
@@ -294,7 +295,7 @@ const Banner = () => {
             </div>
             <div className="transition-transform duration-300 hover:translate-x-1">
               <div className="text-3xl md:text-4xl font-black text-white tracking-tight flex items-baseline gap-0.5">
-                <span>98</span>
+                <NumberTicker value={98} />
                 <span className="text-primary text-xl md:text-2xl">%</span>
               </div>
               <div className="text-[10px] md:text-xs font-semibold text-neutral-light uppercase tracking-widest mt-1">

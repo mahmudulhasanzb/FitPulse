@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import NumberTicker from './NumberTicker';
 
 const RevolutionSection = () => {
   // Stagger animation container
@@ -108,11 +109,16 @@ const RevolutionSection = () => {
             className="flex gap-16 border-t border-white/10 pt-8 w-full max-w-md"
           >
             <div>
-              <div className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">500+</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">
+                <NumberTicker value={500} />
+                <span className="text-primary">+</span>
+              </div>
               <div className="text-[10px] md:text-xs font-bold text-neutral-light/60 uppercase tracking-widest mt-1">Active Classes</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">12k</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight">
+                <NumberTicker value={12} suffix="k" />
+              </div>
               <div className="text-[10px] md:text-xs font-bold text-neutral-light/60 uppercase tracking-widest mt-1">Members</div>
             </div>
           </motion.div>

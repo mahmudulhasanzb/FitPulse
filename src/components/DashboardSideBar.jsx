@@ -20,22 +20,22 @@ import toast from 'react-hot-toast';
 const studentMenuItem = [
   {
     label: 'Overview',
-    href: '/dashboard/overview',
+    href: '/dashboard/student',
     icon: Home,
   },
   {
     label: 'Booked Classes',
-    href: '/dashboard/booked-classes',
+    href: '/dashboard/student/booked-classes',
     icon: Bookmark,
   },
   {
     label: 'Apply As Trainer',
-    href: '/dashboard/apply-as-trainer',
+    href: '/dashboard/student/apply-as-trainer',
     icon: Briefcase,
   },
   {
     label: 'Favourite Classes',
-    href: '/dashboard/favourite-classes',
+    href: '/dashboard/student/favourite-classes',
     icon: Heart,
   },
 ];
@@ -43,7 +43,7 @@ const studentMenuItem = [
 const trainerMenuItem = [
   {
     label: 'Overview',
-    href: '/dashboard/overview',
+    href: '/dashboard/trainer/overview',
     icon: Home,
   },
 ];
@@ -51,7 +51,7 @@ const trainerMenuItem = [
 const adminMenu = [
   {
     label: 'Overview',
-    href: '/dashboard/overview',
+    href: '/dashboard/admin/overview',
     icon: Home,
   },
 ];

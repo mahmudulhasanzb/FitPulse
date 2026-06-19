@@ -13,18 +13,27 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const pathname = usePathname();
 
   const dropdownRef = useRef(null);
+  const searchRef = useRef(null);
   const timeoutRef = useRef(null);
 
   const { data: session, isPending, error } = authClient.useSession();
   const user = session?.user;
 
   useEffect(() => {
+    setIsSearchExpanded(false);
+  }, [pathname]);
+
+  useEffect(() => {
     const handleClickOutside = event => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsUserDropdownOpen(false);
+      }
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearchExpanded(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -95,7 +104,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className={`hidden md:flex items-center space-x-8 transition-all duration-300 ${isSearchExpanded ? 'md:hidden lg:flex' : ''}`}>
             {navLinks.map(link => {
               const active = isLinkActive(link.href);
               return (
@@ -120,17 +129,57 @@ const Navbar = () => {
           {/* Right Section: Search & Profile */}
           <div className="hidden md:flex items-center space-x-4">
             {/* Search Input */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                <Search className="h-4 w-4 text-[#A4A896]/50" />
+            <div ref={searchRef} className="relative flex items-center">
+              {/* Always visible on LG+ screens */}
+              <div className="hidden lg:block relative">
+                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 text-[#A4A896]/50" />
+                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search discussions..."
+                  className="w-56 bg-[#14180A] border border-[#282F18] rounded-full py-2 pl-9 pr-4 text-sm text-white placeholder-[#A4A896]/45 focus:outline-none focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]/30 transition-all duration-200"
+                />
               </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search discussions..."
-                className="w-56 bg-[#14180A] border border-[#282F18] rounded-full py-2 pl-9 pr-4 text-sm text-white placeholder-[#A4A896]/45 focus:outline-none focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]/30 transition-all duration-200"
-              />
+
+              {/* MD screens - Collapsible Search */}
+              <div className="block lg:hidden">
+                {!isSearchExpanded ? (
+                  /* Compact Icon Button (matches attached design mockup) */
+                  <button
+                    onClick={() => setIsSearchExpanded(true)}
+                    className="p-2.5 bg-[#14180A] border border-[#282F18] hover:border-[#D4FF00]/50 rounded-xl text-[#A4A896]/70 hover:text-white cursor-pointer transition-all duration-200 flex items-center justify-center"
+                    title="Search"
+                  >
+                    <Search className="h-5 w-5 text-[#A2B28C] hover:text-[#D4FF00] transition-colors duration-200" />
+                  </button>
+                ) : (
+                  /* Expanded Search Input for MD screen */
+                  <div className="flex items-center space-x-2 animate-fade-in">
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                        <Search className="h-4 w-4 text-[#A4A896]/50" />
+                      </div>
+                      <input
+                        type="text"
+                        autoFocus
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)}
+                        placeholder="Search discussions..."
+                        className="w-48 sm:w-56 bg-[#14180A] border border-[#282F18] rounded-full py-2 pl-9 pr-4 text-sm text-white placeholder-[#A4A896]/45 focus:outline-none focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]/30 transition-all duration-200"
+                      />
+                    </div>
+                    <button
+                      onClick={() => setIsSearchExpanded(false)}
+                      className="p-2.5 bg-[#14180A] border border-[#282F18] hover:border-red-500/50 hover:text-red-400 rounded-xl text-[#A4A896]/70 cursor-pointer transition-all duration-200"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {user ? (

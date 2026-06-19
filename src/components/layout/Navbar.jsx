@@ -20,7 +20,7 @@ const Navbar = () => {
   const searchRef = useRef(null);
   const timeoutRef = useRef(null);
 
-  const { data: session, isPending, error } = authClient.useSession();
+  const { data: session } = authClient.useSession();
   const user = session?.user;
 
   useEffect(() => {
@@ -77,7 +77,6 @@ const Navbar = () => {
     }
   };
 
-  // Links 
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'All Classes', href: '/classes' },
@@ -85,10 +84,7 @@ const Navbar = () => {
     { label: 'Dashboard', href: '/dashboard' },
   ];
 
-  // Helper to determine if link is active
-  const isLinkActive = href => {
-    return pathname === href;
-  };
+  const isLinkActive = href => pathname === href;
 
   return (
     <nav className="w-full bg-[#0E1106] border-b border-[#1C210E] sticky top-0 z-50 transition-all duration-300">
@@ -103,8 +99,12 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <div className={`hidden md:flex items-center space-x-8 transition-all duration-300 ${isSearchExpanded ? 'md:hidden lg:flex' : ''}`}>
+          {/* Navigation Links */}
+          <div
+            className={`hidden md:flex items-center space-x-8 transition-all duration-300 ${
+              isSearchExpanded ? 'md:hidden lg:flex' : ''
+            }`}
+          >
             {navLinks.map(link => {
               const active = isLinkActive(link.href);
               return (
@@ -126,11 +126,10 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Right Section: Search & Profile */}
+          {/* Search & Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Search Input */}
             <div ref={searchRef} className="relative flex items-center">
-              {/* Always visible on LG+ screens */}
+              {/* Desktop Search */}
               <div className="hidden lg:block relative">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                   <Search className="h-4 w-4 text-[#A4A896]/50" />
@@ -144,10 +143,9 @@ const Navbar = () => {
                 />
               </div>
 
-              {/* MD screens - Collapsible Search */}
+              {/* Tablet Search */}
               <div className="block lg:hidden">
                 {!isSearchExpanded ? (
-                  /* Compact Icon Button (matches attached design mockup) */
                   <button
                     onClick={() => setIsSearchExpanded(true)}
                     className="p-2.5 bg-[#14180A] border border-[#282F18] hover:border-[#D4FF00]/50 rounded-xl text-[#A4A896]/70 hover:text-white cursor-pointer transition-all duration-200 flex items-center justify-center"
@@ -156,7 +154,6 @@ const Navbar = () => {
                     <Search className="h-5 w-5 text-[#A2B28C] hover:text-[#D4FF00] transition-colors duration-200" />
                   </button>
                 ) : (
-                  /* Expanded Search Input for MD screen */
                   <div className="flex items-center space-x-2 animate-fade-in">
                     <div className="relative">
                       <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
@@ -184,7 +181,6 @@ const Navbar = () => {
 
             {user ? (
               <div className="flex items-center space-x-3">
-                {/* Notification Bell */}
                 <button className="relative p-2 rounded-full bg-[#14180A] border border-[#282F18] hover:border-[#D4FF00]/50 hover:bg-[#1C210E] transition-all duration-200 group text-white cursor-pointer">
                   <Bell className="h-4.5 w-4.5 text-[#A4A896]/70 group-hover:text-[#D4FF00] transition-colors" />
                   <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#D4FF00] rounded-full border border-[#0E1106] animate-pulse" />
@@ -199,7 +195,7 @@ const Navbar = () => {
                     onClick={handleDropdownClick}
                   >
                     <div className="w-8 h-8 rounded-full overflow-hidden bg-[#282F18] flex items-center justify-center border border-[#3B3E31]">
-                      {user.image ? (
+                      {user?.image ? (
                         <img
                           src={user.image}
                           alt="User avatar"
@@ -210,10 +206,12 @@ const Navbar = () => {
                       )}
                     </div>
                     <span className="text-xs font-semibold text-white/90 hidden sm:block truncate max-w-[80px]">
-                      {user.name || 'Account'}
+                      {user?.name || 'Account'}
                     </span>
                     <ChevronDown
-                      className={`h-3.5 w-3.5 text-[#A4A896]/70 transition-transform duration-300 ${isUserDropdownOpen ? 'rotate-180 text-[#D4FF00]' : ''}`}
+                      className={`h-3.5 w-3.5 text-[#A4A896]/70 transition-transform duration-300 ${
+                        isUserDropdownOpen ? 'rotate-180 text-[#D4FF00]' : ''
+                      }`}
                     />
                   </div>
 
@@ -223,11 +221,10 @@ const Navbar = () => {
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
-                      {/* User Info */}
                       <div className="px-4 pb-3 border-b border-[#1C210E]/60">
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 rounded-full overflow-hidden bg-[#282F18] flex items-center justify-center border border-[#3B3E31]">
-                            {user.image ? (
+                            {user?.image ? (
                               <Image
                                 src={user.image}
                                 width={96}
@@ -241,12 +238,12 @@ const Navbar = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-white font-bold truncate text-sm">
-                              {user.name}
+                              {user?.name}
                             </p>
                             <p className="text-[#A4A896]/60 text-xs truncate">
-                              {user.email}
+                              {user?.email}
                             </p>
-                            {user.role && (
+                            {user?.role && (
                               <span className="inline-block mt-1 text-[9px] font-black uppercase tracking-wider bg-[#D4FF00]/10 text-[#D4FF00] px-1.5 py-0.5 rounded border border-[#D4FF00]/20">
                                 {user.role}
                               </span>
@@ -255,7 +252,6 @@ const Navbar = () => {
                         </div>
                       </div>
 
-                      {/* Links */}
                       <div className="p-1.5 space-y-0.5">
                         <Link
                           href="/dashboard"
@@ -273,7 +269,6 @@ const Navbar = () => {
                         </Link>
                       </div>
 
-                      {/* Sign Out */}
                       <div className="border-t border-[#1C210E]/60 p-1.5 mt-1.5">
                         <button
                           onClick={handleSignOut}
@@ -296,7 +291,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -326,7 +321,6 @@ const Navbar = () => {
         id="mobile-menu"
       >
         <div className="px-4 pt-2 pb-6 space-y-4 bg-[#0E1106]/95 backdrop-blur-lg">
-          {/* Mobile links */}
           <div className="flex flex-col space-y-2">
             {navLinks.map(link => {
               const active = isLinkActive(link.href);
@@ -347,7 +341,6 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Mobile search */}
           <div className="relative px-3">
             <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
               <Search className="h-4 w-4 text-[#A4A896]/50" />
@@ -361,7 +354,6 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Mobile profile section */}
           <div className="px-3 pt-2 border-t border-[#1C210E]/60">
             {user ? (
               <div className="space-y-4">

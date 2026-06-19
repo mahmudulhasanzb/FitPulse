@@ -137,7 +137,7 @@ const RevolutionSection = () => {
               className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden border-4 border-white/10 shadow-2xl z-10 bg-neutral-dark/10"
             >
               <Image 
-                src="/gym_treadmills.png" 
+                src="/assets/images/gym_treadmills.png" 
                 alt="Gym Treadmills Revolution" 
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"

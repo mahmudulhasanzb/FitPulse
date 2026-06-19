@@ -8,14 +8,14 @@ const classCards = [
   {
     _id: 'class-hiit-masterclass',
     className: 'HIIT Masterclass',
-    trainerName: 'Jane Doe',
+    trainerName: 'Marcus Thorne',
     description:
       'Max-effort conditioning designed to shred body fat and build endurance.',
     category: 'HIIT',
     price: 30.0,
     duration: '45 minutes',
     bookingCount: 45,
-    image: '/hiit_workout.png',
+    image: '/assets/images/class_metcon.png',
     featured: true,
     status: 'Approved',
     badge: 'POPULAR',
@@ -26,14 +26,14 @@ const classCards = [
   {
     _id: 'class-zen-yoga',
     className: 'Zen Yoga',
-    trainerName: 'Jane Doe',
+    trainerName: 'Alex Rivera',
     description:
       'Focus on mobility, breathing techniques, and active recovery for the elite athlete.',
     category: 'Yoga',
     price: 25.0,
     duration: '60 minutes',
     bookingCount: 30,
-    image: '/zen_yoga.png',
+    image: '/assets/images/class_yoga.png',
     featured: true,
     status: 'Approved',
     badge: 'MINDFULNESS',
@@ -44,21 +44,21 @@ const classCards = [
   {
     _id: 'class-power-lifting',
     className: 'Power Lifting',
-    trainerName: 'Jane Doe',
+    trainerName: 'Marcus Thorne',
     description:
       'Technical strength development focusing on Big Three movements: Squat, Bench, Deadlift.',
     category: 'Powerlifting',
     price: 35.0,
     duration: '90 minutes',
     bookingCount: 50,
-    image: '/power_lifting.png',
+    image: '/assets/images/power_lifting.png',
     featured: true,
     status: 'Approved',
     badge: null,
     badgeType: null,
     slotsLeft: 0,
     icon: 'dumbbell',
-  },
+  }
 ];
 
 const FeaturedSection = () => {

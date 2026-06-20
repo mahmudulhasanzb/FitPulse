@@ -15,5 +15,6 @@ export const serverMutation = async (path, method, data) => {
 export const serverFetch = async (path) => {
   const formattedPath = path.startsWith('/') ? path : `/${path}`;
   const res = await fetch(`${baseUrl}${formattedPath}`)
+  
   return res.json()
 }

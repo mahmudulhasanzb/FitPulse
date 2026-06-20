@@ -12,6 +12,9 @@ import {
   User,
   LayoutDashboard,
   ChevronDown,
+  PlusCircle,
+  Plus,
+  MessageCircle,
 } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
@@ -43,15 +46,35 @@ const studentMenuItem = [
 const trainerMenuItem = [
   {
     label: 'Overview',
-    href: '/dashboard/trainer/overview',
+    href: '/dashboard/trainer',
     icon: Home,
+  },
+  {
+    label: 'Add Classes',
+    href: '/dashboard/trainer/add-classes',
+    icon: PlusCircle,
+  },
+  {
+    label: 'My Classes',
+    href: '/dashboard/trainer/my-classes',
+    icon: Bookmark,
+  },
+  {
+    label: 'Add Forum Post',
+    href: '/dashboard/trainer/add-forum-post',
+    icon: Plus,
+  },
+  {
+    label: 'My Forum Posts',
+    href: '/dashboard/trainer/my-forum-posts',
+    icon: MessageCircle,  
   },
 ];
 
 const adminMenu = [
   {
     label: 'Overview',
-    href: '/dashboard/admin/overview',
+    href: '/dashboard/admin',
     icon: Home,
   },
 ];

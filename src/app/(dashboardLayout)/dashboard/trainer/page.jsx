@@ -1,34 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useSession } from '@/lib/auth-client';
 import { motion } from 'framer-motion';
 import {
-  Calendar,
-  Heart,
+  Users,
+  Dumbbell,
   User,
   Mail,
+  Star,
   Clock,
-  AlertTriangle,
-  ChevronRight,
   Sparkles,
-  FileText,
+  ChevronRight,
+  PlusCircle,
 } from 'lucide-react';
 import Image from 'next/image';
 
-const StudentOverViewPage = () => {
+const TrainerOverviewPage = () => {
   const { data: session } = useSession();
   const user = session?.user;
 
-  const [appStatus, setAppStatus] = useState('rejected');
-
+  // Static statistics
   const stats = {
-    bookedClasses: 5,
-    favorites: 8,
+    classesCreated: 12,
+    studentsEnrolled: 148,
   };
 
-  const adminFeedback =
-    'Please verify your personal fitness credentials and upload a clear, high-resolution copy of your certification document. The provided certificate was expired. You can re-apply once updated.';
+  const trainerDetails = {
+    specializations: ['HIIT', 'Strength Conditioning', 'Powerlifting'],
+    rating: 4.9,
+    reviewCount: 48,
+    slotsAvailable: 8,
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -75,10 +78,10 @@ const StudentOverViewPage = () => {
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#D4FF00] tracking-widest uppercase mb-1">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Student Dashboard</span>
+              <span>Trainer Portal</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tight">
-              Welcome Back, {user?.name ? user.name.split(' ')[0] : 'Athlete'}!
+              Welcome Back, Coach {user?.name ? user.name.split(' ')[0] : 'Trainer'}!
             </h1>
           </div>
           <div className="text-xs text-[#A4A896]/60 font-semibold md:text-right">
@@ -98,39 +101,39 @@ const StudentOverViewPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-[#A4A896]/60 uppercase tracking-wider">
-                  Booked Classes
+                  Total Classes Created
                 </p>
                 <h3 className="text-4xl md:text-5xl font-black mt-2 text-white font-mono tracking-tight">
-                  {stats.bookedClasses}
+                  {stats.classesCreated}
                 </h3>
               </div>
               <div className="p-3 bg-[#1A1F0F] rounded-2xl border border-[#282F18]">
-                <Calendar className="h-6 w-6 text-[#D4FF00]" />
+                <Dumbbell className="h-6 w-6 text-[#D4FF00]" />
               </div>
             </div>
             <div className="mt-4 flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-              <span>View Bookings</span>
+              <span>Manage Classes</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </div>
           </div>
 
           <div className="relative group bg-[#13160B] border border-[#1C210E] rounded-3xl p-6 overflow-hidden transition-all duration-300 hover:border-[#D4FF00]/40">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-bl-full pointer-events-none group-hover:bg-red-500/10 transition-all duration-300" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4FF00]/5 rounded-bl-full pointer-events-none group-hover:bg-[#D4FF00]/10 transition-all duration-300" />
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-[#A4A896]/60 uppercase tracking-wider">
-                  Favorite Classes
+                  Total Students Enrolled
                 </p>
                 <h3 className="text-4xl md:text-5xl font-black mt-2 text-white font-mono tracking-tight">
-                  {stats.favorites}
+                  {stats.studentsEnrolled}
                 </h3>
               </div>
-              <div className="p-3 bg-[#1F1414] rounded-2xl border border-[#2F1818]">
-                <Heart className="h-6 w-6 text-red-500" />
+              <div className="p-3 bg-[#1A1F0F] rounded-2xl border border-[#282F18]">
+                <Users className="h-6 w-6 text-[#D4FF00]" />
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-[11px] font-bold text-red-400 tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-              <span>View Favorites</span>
+            <div className="mt-4 flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+              <span>View Roster</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </div>
           </div>
@@ -166,103 +169,82 @@ const StudentOverViewPage = () => {
 
             <div className="space-y-2 w-full">
               <h2 className="text-xl font-bold text-white truncate px-2">
-                {user?.name || 'Guest User'}
+                {user?.name || 'Guest Trainer'}
               </h2>
               <div className="flex items-center justify-center gap-1.5 text-xs text-[#A4A896]/70 truncate px-2">
                 <Mail className="h-3.5 w-3.5 text-[#A4A896]/50 flex-shrink-0" />
                 <span className="truncate">
-                  {user?.email || 'guest@fitpulse.com'}
+                  {user?.email || 'trainer@fitpulse.com'}
                 </span>
               </div>
             </div>
 
             <div className="pt-2 w-full">
               <div className="inline-block text-xs font-black uppercase tracking-widest bg-[#D4FF00]/10 text-[#D4FF00] px-4 py-1.5 rounded-full border border-[#D4FF00]/20">
-                User
+                Trainer
               </div>
             </div>
           </div>
 
           <div className="md:col-span-3 bg-[#13160B] border border-[#1C210E] rounded-3xl p-6 flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xs font-bold text-[#A4A896]/40 uppercase tracking-widest">
-                  Trainer Application
-                </h3>
+            <div className="space-y-6">
+              <h3 className="text-xs font-bold text-[#A4A896]/40 uppercase tracking-widest">
+                Trainer Overview Summary
+              </h3>
 
-                <div className="flex items-center gap-1 bg-[#14180A] border border-[#1C210E] p-0.5 rounded-lg">
-                  <button
-                    onClick={() => setAppStatus('pending')}
-                    className={`text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded transition-colors ${
-                      appStatus === 'pending'
-                        ? 'bg-[#282F18] text-[#D4FF00]'
-                        : 'text-[#A4A896]/50 hover:text-white'
-                    }`}
-                  >
-                    Pending
-                  </button>
-                  <button
-                    onClick={() => setAppStatus('rejected')}
-                    className={`text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded transition-colors ${
-                      appStatus === 'rejected'
-                        ? 'bg-[#282F18] text-[#D4FF00]'
-                        : 'text-[#A4A896]/50 hover:text-white'
-                    }`}
-                  >
-                    Rejected
-                  </button>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-1">
+                  <Star className="h-4.5 w-4.5 fill-[#D4FF00] text-[#D4FF00]" />
+                  <span className="text-base font-extrabold text-white">
+                    {trainerDetails.rating}
+                  </span>
+                  <span className="text-xs text-[#A4A896]/60 font-semibold">
+                    ({trainerDetails.reviewCount} Reviews)
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <Clock className="h-4.5 w-4.5 text-[#D4FF00]" />
+                  <span className="text-xs text-[#A4A896]/80 font-bold uppercase tracking-wider">
+                    {trainerDetails.slotsAvailable} Slots Left This Week
+                  </span>
                 </div>
               </div>
-              {appStatus === 'pending' ? (
-                <div className="space-y-4 pt-4">
-                  <div className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider">
-                    <Clock className="h-4 w-4" />
-                    <span>Pending Review</span>
-                  </div>
-                  <h4 className="text-lg font-bold text-white">
-                    Application Received
-                  </h4>
-                  <p className="text-xs md:text-sm text-[#A4A896]/80 leading-relaxed">
-                    Thank you for applying to be a trainer at FitPulse! Your
-                    application credentials, experience, and slots are currently
-                    being evaluated by our team. This process normally takes 2-3
-                    business days.
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-4 pt-4">
-                  <div className="inline-flex items-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20 px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider">
-                    <AlertTriangle className="h-4 w-4" />
-                    <span>Application Rejected</span>
-                  </div>
-                  <h4 className="text-lg font-bold text-white">
-                    Application Review Feedback
-                  </h4>
 
-                  <div className="bg-[#1C1111]/30 border border-[#2F1818] rounded-2xl p-4 space-y-2">
-                    <div className="text-[10px] font-black uppercase tracking-widest text-red-400/80">
-                      Feedback from Administrator
-                    </div>
-                    <p className="text-xs text-[#A4A896]/90 leading-relaxed italic">
-                      "{adminFeedback}"
-                    </p>
-                  </div>
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                  Specializations
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {trainerDetails.specializations.map((spec, index) => (
+                    <span
+                      key={index}
+                      className="text-[10px] font-bold uppercase tracking-wider bg-[#1A1F0F] border border-[#282F18] text-[#D4FF00] px-3 py-1 rounded-full"
+                    >
+                      {spec}
+                    </span>
+                  ))}
                 </div>
-              )}
+              </div>
+
+              <div className="space-y-1.5">
+                <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                  Professional Bio
+                </h4>
+                <p className="text-xs text-[#A4A896]/80 leading-relaxed">
+                  Certified master trainer specializing in high-intensity functional conditioning, athletic development, and raw strength training. Passionate about empowering athletes to crush milestones and build consistency.
+                </p>
+              </div>
             </div>
 
             <div className="mt-8 pt-4 border-t border-[#1C210E]/60 flex items-center justify-between">
               <span className="text-[11px] text-[#A4A896]/50 font-semibold">
-                {appStatus === 'pending'
-                  ? 'Submitted on Jun 19, 2026'
-                  : 'Status update on Jun 20, 2026'}
+                Status: Verified Coach
               </span>
-              {appStatus === 'rejected' && (
-                <button className="flex items-center gap-1.5 text-xs font-bold bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] px-4 py-2.5 rounded-full cursor-pointer transition-colors duration-200 uppercase">
-                  <FileText className="h-3.5 w-3.5" />
-                  <span>Re-apply Now</span>
-                </button>
-              )}
+              <button className="flex items-center gap-1.5 text-xs font-bold bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] px-4 py-2.5 rounded-full cursor-pointer transition-colors duration-200 uppercase">
+                <PlusCircle className="h-3.5 w-3.5" />
+                <span>Create New Class</span>
+              </button>
             </div>
           </div>
         </motion.div>
@@ -271,4 +253,4 @@ const StudentOverViewPage = () => {
   );
 };
 
-export default StudentOverViewPage;
+export default TrainerOverviewPage;

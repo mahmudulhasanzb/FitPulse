@@ -74,7 +74,7 @@ const AddNewClassesPage = () => {
     };
     const resData = await addClasses(classData)
 
-    console.log('MongoDB Insert Payload:', classData);
+
   };
 
   return (

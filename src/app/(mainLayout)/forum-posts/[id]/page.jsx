@@ -4,6 +4,8 @@ import { ArrowLeft, Activity, CheckCircle2, Zap, User } from 'lucide-react';
 import { getMyForumPostById } from '@/lib/api/forum/data';
 import Image from 'next/image';
 
+export const dynamic = 'force-dynamic';
+
 const MyForumPostDetails = async ({ params }) => {
   const { id } = await params;
   const post = await getMyForumPostById(id);

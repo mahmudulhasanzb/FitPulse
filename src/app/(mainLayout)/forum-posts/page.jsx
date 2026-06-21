@@ -8,6 +8,8 @@ import {
 } from '@/components/Pagination ';
 import { getAllForumPosts } from '@/lib/api/forum/data';
 
+export const dynamic = 'force-dynamic';
+
 const ForumPosts = async () => {
   const forumPosts = await getAllForumPosts();
 

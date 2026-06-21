@@ -1,5 +1,12 @@
 import { serverFetch } from "../server"
 
+
+export const getAllForumPosts = async () => {
+  const result = await serverFetch('api/forum-posts')
+
+  return result;
+}
+
 export const getMyForumPosts = async (email) => {
   const result = await serverFetch(`api/my-forum-post/${email}`)
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Eye, Trash2 } from 'lucide-react';
-import { deleteForumPost } from '@/lib/api/add-forum/action';
+import { deleteForumPost } from '@/lib/api/forum/action';
 import Image from 'next/image';
 
 const MyForumPostCard = ({ post }) => {
@@ -29,7 +29,7 @@ const MyForumPostCard = ({ post }) => {
     <div className="relative group bg-[#13160B] border border-[#1C210E] hover:border-[#D4FF00]/40 rounded-3xl overflow-hidden transition-all duration-300 flex flex-col h-full shadow-xl">
       {/* Absolute overlay link for card clicks (excluding bottom actions) */}
       <Link
-        href={`/dashboard/trainer/my-forum-posts/${post._id}`}
+        href={`/forum-posts/${post._id}`}
         className="absolute inset-0 z-0"
       />
 

@@ -68,7 +68,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/forum"
+                    href="/forum-posts"
                     className="hover:text-white transition-colors duration-200"
                   >
                     Forum

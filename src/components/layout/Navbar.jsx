@@ -80,7 +80,7 @@ const Navbar = () => {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'All Classes', href: '/classes' },
-    { label: 'Community Forum', href: '/forum' },
+    { label: 'Community Forum', href: '/forum-posts' },
     { label: 'Dashboard', href: '/dashboard' },
   ];
 

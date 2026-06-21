@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Activity, CheckCircle2, Zap, User } from 'lucide-react';
-import { getMyForumPostById } from '@/lib/api/add-forum/data';
+import { getMyForumPostById } from '@/lib/api/forum/data';
 import Image from 'next/image';
 
 const MyForumPostDetails = async ({ params }) => {
@@ -91,17 +91,19 @@ const MyForumPostDetails = async ({ params }) => {
 
             {/* Author Profile block */}
             <div className="flex items-center gap-3 pt-2">
-              <div className="w-10 h-10 rounded-full border border-[#1C210E] bg-[#13160B] flex items-center justify-center text-[#A4A896]/60 overflow-hidden">
-                <User className="h-5 w-5" />
-              </div>
+              <Image
+                src={post.authorImage}
+                alt="authorImage"
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-full border border-[#1C210E] bg-[#13160B] flex items-center justify-center text-[#A4A896]/60 overflow-hidden"
+              />
               <div>
                 <div className="text-xs font-extrabold text-white">
-                  {post.authorName || 'Marcus Sterling'}
+                  {post.authorName }
                 </div>
                 <div className="text-[9px] font-black text-[#D4FF00] tracking-wider uppercase mt-0.5">
-                  {post.role === 'trainer'
-                    ? 'Lead Strength Specialist'
-                    : 'Verified Coach'}
+                  {post.role }
                 </div>
               </div>
             </div>

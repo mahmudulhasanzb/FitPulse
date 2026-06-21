@@ -17,7 +17,7 @@ const MyForumPostDetails = async ({ params }) => {
           Post Not Found
         </h2>
         <Link
-          href="/dashboard/trainer/my-forum-posts"
+          href="/forum-posts"
           className="text-xs font-black uppercase text-[#D4FF00] hover:underline"
         >
           Back to list
@@ -68,7 +68,7 @@ const MyForumPostDetails = async ({ params }) => {
           {/* Back button */}
           <div>
             <Link
-              href="/dashboard/trainer/my-forum-posts"
+              href="/forum-posts"
               className="inline-flex items-center gap-1.5 text-[10px] font-black tracking-widest text-white/60 hover:text-[#D4FF00] transition-colors duration-200 uppercase"
             >
               <ArrowLeft className="h-3.5 w-3.5" />

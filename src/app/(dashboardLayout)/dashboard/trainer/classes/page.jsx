@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 
 const MyClasses = () => {
+
+
   const classes = [
     {
       id: 1,

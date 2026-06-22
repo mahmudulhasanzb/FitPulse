@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ClassCard from '@/components/ClassCard';
+import { getAllClasses } from '@/lib/api/classes/action';
 
 // Dummy dataset matching mockup items + extra filters
 const initialClasses = [
@@ -90,18 +91,55 @@ const initialClasses = [
 // Available categories matching the filter buttons
 const categories = ['ALL CLASSES', 'YOGA', 'CARDIO', 'WEIGHTS', 'HIIT', 'PILATES'];
 
-const AllClassesPage = () => {
+const AllClassesPage = async () => {
+
+  const allClasses = await getAllClasses();
+  console.log(allClasses);
+
+  const [classes, setClasses] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('ALL CLASSES');
 
+  useEffect(() => {
+    const loadClasses = async () => {
+      try {
+        const fetched = await getAllClasses();
+        if (Array.isArray(fetched)) {
+          setClasses(fetched);
+        }
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+    };
+    loadClasses();
+  }, []);
+
+  const normalizedClasses = useMemo(() => {
+    const apiClasses = classes.map((item) => ({
+      _id: item._id || `class-db-${Math.random()}`,
+      className: (item.title || item.className || 'UNNAMED CLASS').toUpperCase(),
+      trainerName: item.trainerName || item.email || 'ALEX RIVERA',
+      trainerRole: item.trainerRole || 'LEAD STRENGTH COACH',
+      trainerAvatar: item.trainerAvatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop',
+      category: (item.category || 'HIIT').toUpperCase(),
+      price: typeof item.price === 'number' ? item.price : parseFloat(item.price || 0),
+      duration: typeof item.duration === 'number' ? `${item.duration} Minutes` : (item.duration || '45 Minutes'),
+      level: item.difficulty || item.level || 'All Levels',
+      image: item.coverImage || item.image || '/assets/images/class_metcon.png',
+      status: item.status || 'Approved',
+    }));
+
+    return [...initialClasses, ...apiClasses];
+  }, [classes]);
+
   // Perform memoized search and category filtering
   const filteredClasses = useMemo(() => {
-    return initialClasses.filter(classItem => {
+    return normalizedClasses.filter(classItem => {
       const matchesSearch = classItem.className.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'ALL CLASSES' || classItem.category.toUpperCase() === selectedCategory.toUpperCase();
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [normalizedClasses, searchQuery, selectedCategory]);
 
   // Framer Motion animation configurations
   const gridVariants = {
@@ -212,7 +250,7 @@ const AllClassesPage = () => {
 
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default AllClassesPage;

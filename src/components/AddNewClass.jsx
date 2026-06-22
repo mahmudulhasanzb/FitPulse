@@ -78,7 +78,7 @@ const AddNewClass = () => {
       createdAt: new Date(),
     };
     const resData = await addClasses(classData);
-    if (resData.success) {
+    if (resData.acknowledged) {
       toast.success('Class created successfully');
       router.push(`/dashboard/${session?.user?.role?.toLowerCase()}/classes`);
     } else {

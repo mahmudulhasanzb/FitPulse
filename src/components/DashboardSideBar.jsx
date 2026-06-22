@@ -51,17 +51,17 @@ const trainerMenuItem = [
   },
   {
     label: 'Add Classes',
-    href: '/dashboard/trainer/add-classes',
+    href: '/dashboard/trainer/classes/add-class',
     icon: PlusCircle,
   },
   {
     label: 'My Classes',
-    href: '/dashboard/trainer/my-classes',
+    href: '/dashboard/trainer/classes',
     icon: Bookmark,
   },
   {
     label: 'Add Forum Post',
-    href: '/dashboard/trainer/add-forum-post',
+    href: '/dashboard/trainer/forum/add-forum',
     icon: Plus,
   },
   {

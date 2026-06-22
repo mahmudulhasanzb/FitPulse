@@ -66,7 +66,7 @@ const trainerMenuItem = [
   },
   {
     label: 'My Forum Posts',
-    href: '/dashboard/trainer/my-forum-posts',
+    href: '/dashboard/trainer/forum',
     icon: MessageCircle,  
   },
 ];

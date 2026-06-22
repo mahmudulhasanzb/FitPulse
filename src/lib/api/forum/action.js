@@ -17,7 +17,7 @@ export const updateForumPost = async (id, data) => {
 export const deleteForumPost = async formData => {
   const id = formData.get('postId');
   const res = await serverMutation(`/api/forum-post/${id}`, 'DELETE');
-  revalidatePath('/dashboard/trainer/my-forum-posts');
+  revalidatePath('/dashboard/trainer/forum');
   return res;
 };
 

@@ -115,8 +115,8 @@ const classes = await getClassByEmail(session?.user?.email)
                         {cls.totalEnrollment}
                         <span className="text-[#A4A896]/35 font-normal">
                           {' '}
-                          / 20
-                          {/* {cls.capacity} */}
+                          /
+                          {cls.capacity}
                         </span>
                       </div>
                     </td>

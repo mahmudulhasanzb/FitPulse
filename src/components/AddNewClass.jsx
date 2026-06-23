@@ -9,6 +9,7 @@ import {
   ArrowRight,
   ChevronDown,
   Plus,
+  Users,
 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { uploadImage } from '@/lib/uploadImage';
@@ -73,8 +74,9 @@ const AddNewClass = () => {
       schedule: data.schedule,
       startTime: data.startTime,
       description: data.description,
-      status: 'pending',
+      status: 'Pending',
       totalEnrollment: 0,
+      capacity: parseInt(data.capacity, 10),
       createdAt: new Date(),
     };
     const resData = await addClasses(classData);
@@ -300,6 +302,32 @@ const AddNewClass = () => {
             {errors?.price && (
               <p className="text-red-500 text-xs mt-2">
                 {errors.price.message}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-[#A4A896]/60 uppercase tracking-widest block">
+              Class Capacity
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-[#A4A896]/40">
+                <Users className="h-4 w-4" />
+              </div>
+              <input
+                type="number"
+                {...register('capacity', {
+                  required: 'Capacity is required',
+                  min: { value: 1, message: 'Capacity must be at least 1' },
+                })}
+                placeholder="20"
+                min="1"
+                className="w-full bg-[#0A0D02] border border-[#282F18] rounded-xl py-3.5 pl-11 pr-4 text-sm text-white placeholder-[#A4A896]/30 focus:outline-none focus:border-[#D4FF00] transition-colors duration-200"
+              />
+            </div>
+            {errors?.capacity && (
+              <p className="text-red-500 text-xs mt-2">
+                {errors.capacity.message}
               </p>
             )}
           </div>

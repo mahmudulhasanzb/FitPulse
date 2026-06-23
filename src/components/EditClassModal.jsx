@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Pencil, X, Upload, Clock, DollarSign, ChevronDown } from 'lucide-react';
+import { Pencil, X, Upload, Clock, DollarSign, ChevronDown, Users } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { uploadImage } from '@/lib/uploadImage';
 import { updateClasses } from '@/lib/api/classes/action';
@@ -46,6 +46,7 @@ const EditClassModal = ({ classData }) => {
         schedule: classData.schedule || [],
         startTime: classData.startTime,
         description: classData.description,
+        capacity: classData.capacity || 20,
       });
       setImageUrl(classData.coverImage || '');
     }
@@ -81,6 +82,7 @@ const EditClassModal = ({ classData }) => {
         schedule: data.schedule,
         startTime: data.startTime,
         description: data.description,
+        capacity: parseInt(data.capacity, 10),
       };
 
       const res = await updateClasses(classData._id, updatedData);
@@ -248,8 +250,8 @@ const EditClassModal = ({ classData }) => {
                 </div>
               </div>
 
-              {/* Duration & Price */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Duration, Price & Capacity */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-[#A4A896]/60 uppercase tracking-widest block">
                     Duration (Mins)
@@ -296,6 +298,30 @@ const EditClassModal = ({ classData }) => {
                   </div>
                   {errors?.price && (
                     <p className="text-red-500 text-xs mt-1">{errors.price.message}</p>
+                  )}
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold text-[#A4A896]/60 uppercase tracking-widest block">
+                    Class Capacity
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-[#A4A896]/40">
+                      <Users className="h-4 w-4" />
+                    </div>
+                    <input
+                      type="number"
+                      {...register('capacity', {
+                        required: 'Capacity is required',
+                        min: { value: 1, message: 'Capacity must be at least 1' },
+                      })}
+                      placeholder="20"
+                      min="1"
+                      className="w-full bg-[#0A0D02] border border-[#282F18] rounded-xl py-3 pl-11 pr-4 text-sm text-white focus:outline-none focus:border-[#D4FF00] transition-colors duration-200"
+                    />
+                  </div>
+                  {errors?.capacity && (
+                    <p className="text-red-500 text-xs mt-1">{errors.capacity.message}</p>
                   )}
                 </div>
               </div>

@@ -2,66 +2,26 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import FeaturedCard from './FeaturedCard';
+import FeaturedClassCard from './FeaturedClassCard';
 
-const classCards = [
-  {
-    _id: 'class-hiit-masterclass',
-    className: 'HIIT Masterclass',
-    trainerName: 'Marcus Thorne',
-    description:
-      'Max-effort conditioning designed to shred body fat and build endurance.',
-    category: 'HIIT',
-    price: 30.0,
-    duration: '45 minutes',
-    bookingCount: 45,
-    image: '/assets/images/class_metcon.png',
-    featured: true,
-    status: 'Approved',
-    badge: 'POPULAR',
-    badgeType: 'highlight',
-    slotsLeft: 12,
-    icon: 'lightning',
-  },
-  {
-    _id: 'class-zen-yoga',
-    className: 'Zen Yoga',
-    trainerName: 'Alex Rivera',
-    description:
-      'Focus on mobility, breathing techniques, and active recovery for the elite athlete.',
-    category: 'Yoga',
-    price: 25.0,
-    duration: '60 minutes',
-    bookingCount: 30,
-    image: '/assets/images/class_yoga.png',
-    featured: true,
-    status: 'Approved',
-    badge: 'MINDFULNESS',
-    badgeType: 'muted',
-    slotsLeft: 8,
-    icon: 'sprout',
-  },
-  {
-    _id: 'class-power-lifting',
-    className: 'Power Lifting',
-    trainerName: 'Marcus Thorne',
-    description:
-      'Technical strength development focusing on Big Three movements: Squat, Bench, Deadlift.',
-    category: 'Powerlifting',
-    price: 35.0,
-    duration: '90 minutes',
-    bookingCount: 50,
-    image: '/assets/images/power_lifting.png',
-    featured: true,
-    status: 'Approved',
-    badge: null,
-    badgeType: null,
-    slotsLeft: 0,
-    icon: 'dumbbell',
-  }
-];
+import { useState, useEffect } from 'react';
+import { getAllClasses } from '@/lib/api/classes/data';
 
 const FeaturedSection = () => {
+  const [classCards, setClassCards] = useState([]);
+
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const data = await getAllClasses();
+        setClassCards(data || []);
+      } catch (err) {
+        console.error('Failed to fetch classes:', err);
+      }
+    };
+    fetchClasses();
+  }, []);
+
   // Stagger variants for the cards entering viewport
   const containerVariants = {
     hidden: {},
@@ -108,7 +68,7 @@ const FeaturedSection = () => {
           </motion.a>
         </div>
 
-        {/* Classes Grid */}
+                {/* Classes Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -116,11 +76,15 @@ const FeaturedSection = () => {
           viewport={{ once: true, margin: '-80px' }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {classCards.map(classItem => (
-            <motion.div key={classItem._id} variants={cardContainerVariants}>
-              <FeaturedCard classData={classItem} />
-            </motion.div>
-          ))}
+          {/* Show only latest 3 classes */}
+          {[...classCards]
+            .reverse()
+            .slice(0, 3)
+            .map((classItem) => (
+              <motion.div key={classItem._id} variants={cardContainerVariants}>
+                <FeaturedClassCard classData={classItem} />
+              </motion.div>
+            ))}
         </motion.div>
       </div>
     </section>

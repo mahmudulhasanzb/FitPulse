@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSession } from '@/lib/auth-client';
 import { motion } from 'framer-motion';
 import {
@@ -15,16 +15,31 @@ import {
   PlusCircle,
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { getClassByEmail } from '@/lib/api/classes/data';
 
 const TrainerOverviewPage = () => {
   const { data: session } = useSession();
   const user = session?.user;
+  const email = user?.email;
 
-  // Static statistics
-  const stats = {
-    classesCreated: 12,
-    studentsEnrolled: 148,
-  };
+  const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (email) {
+      setLoading(true);
+      getClassByEmail(email)
+        .then((res) => {
+          setClasses(res || []);
+        })
+        .catch((err) => console.error(err))
+        .finally(() => setLoading(false));
+    }
+  }, [email]);
+
+  const classCount = classes.length;
+  const totalStudentEnrolled = classes.reduce((sum, cls) => sum + (cls.totalEnrollment || 0), 0);
 
   const trainerDetails = {
     specializations: ['HIIT', 'Strength Conditioning', 'Powerlifting'],
@@ -104,17 +119,17 @@ const TrainerOverviewPage = () => {
                   Total Classes Created
                 </p>
                 <h3 className="text-4xl md:text-5xl font-black mt-2 text-white font-mono tracking-tight">
-                  {stats.classesCreated}
+                  {classCount}
                 </h3>
               </div>
               <div className="p-3 bg-[#1A1F0F] rounded-2xl border border-[#282F18]">
                 <Dumbbell className="h-6 w-6 text-[#D4FF00]" />
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+            <Link href="/dashboard/trainer/classes" className="mt-4 flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
               <span>Manage Classes</span>
               <ChevronRight className="h-3.5 w-3.5" />
-            </div>
+            </Link>
           </div>
 
           <div className="relative group bg-[#13160B] border border-[#1C210E] rounded-3xl p-6 overflow-hidden transition-all duration-300 hover:border-[#D4FF00]/40">
@@ -125,17 +140,17 @@ const TrainerOverviewPage = () => {
                   Total Students Enrolled
                 </p>
                 <h3 className="text-4xl md:text-5xl font-black mt-2 text-white font-mono tracking-tight">
-                  {stats.studentsEnrolled}
+                  {totalStudentEnrolled}
                 </h3>
               </div>
               <div className="p-3 bg-[#1A1F0F] rounded-2xl border border-[#282F18]">
                 <Users className="h-6 w-6 text-[#D4FF00]" />
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+            <Link href="/dashboard/trainer/classes" className="mt-4 flex items-center gap-1 text-[11px] font-bold text-[#D4FF00] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
               <span>View Roster</span>
               <ChevronRight className="h-3.5 w-3.5" />
-            </div>
+            </Link>
           </div>
         </motion.div>
 
@@ -241,10 +256,10 @@ const TrainerOverviewPage = () => {
               <span className="text-[11px] text-[#A4A896]/50 font-semibold">
                 Status: Verified Coach
               </span>
-              <button className="flex items-center gap-1.5 text-xs font-bold bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] px-4 py-2.5 rounded-full cursor-pointer transition-colors duration-200 uppercase">
+              <Link href="/dashboard/trainer/classes/add-class" className="flex items-center gap-1.5 text-xs font-bold bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] px-4 py-2.5 rounded-full cursor-pointer transition-colors duration-200 uppercase">
                 <PlusCircle className="h-3.5 w-3.5" />
                 <span>Create New Class</span>
-              </button>
+              </Link>
             </div>
           </div>
         </motion.div>

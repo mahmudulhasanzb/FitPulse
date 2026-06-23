@@ -5,38 +5,36 @@ import { Zap, Sprout, Dumbbell } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const FeaturedCard = ({ classData }) => {
+const FeaturedClassCard = ({ classData }) => {
   const {
     className,
     description,
     duration,
     image,
+    coverImage,
     badge,
     badgeType,
-    slotsLeft,
+    capacity,
+    bookingCount,
+    category,
     icon,
   } = classData;
 
-  // Render correct icon matching class type
-  const getIcon = () => {
-    switch (icon) {
-      case 'lightning':
-        return <Zap className="w-4 h-4 text-primary fill-primary/10" />;
-      case 'sprout':
-        return <Sprout className="w-4 h-4 text-primary" />;
-      case 'dumbbell':
-        return <Dumbbell className="w-4 h-4 text-primary" />;
-      default:
-        return <Zap className="w-4 h-4 text-primary animate-pulse" />;
-    }
-  };
+  // Determine image source
+  const imgSrc = image || coverImage || '/assets/images/default_class.png';
+
+  // Determine slots left based on capacity and bookings
+  const slots = (capacity != null && bookingCount != null) ? capacity - bookingCount : null;
+
+  // Determine icon based on category if not provided
+  const derivedIcon = icon || (category === 'HIIT' ? 'lightning' : category === 'Yoga' ? 'sprout' : category === 'Powerlifting' ? 'dumbbell' : 'lightning');
 
   return (
     <motion.div className="bg-bg-card border border-white/5 rounded-2xl overflow-hidden flex flex-col h-full shadow-lg hover:shadow-2xl hover:border-primary/20 transition-all duration-300 group cursor-pointer">
       {/* Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-custom/10">
         <Image
-          src={image}
+          src={imgSrc}
           alt={className}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
@@ -62,10 +60,21 @@ const FeaturedCard = ({ classData }) => {
       <div className="p-6 flex flex-col flex-1">
         {/* Duration Meta */}
         <div className="flex items-center gap-2 mb-3">
-          {getIcon()}
-          <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-primary">
-            {duration}
-          </span>
+          {(() => {
+            switch (derivedIcon) {
+              case 'lightning':
+                return <Zap className="w-4 h-4 text-primary fill-primary/10" />;
+              case 'sprout':
+                return <Sprout className="w-4 h-4 text-primary" />;
+              case 'dumbbell':
+                return <Dumbbell className="w-4 h-4 text-primary" />;
+              default:
+                return <Zap className="w-4 h-4 text-primary animate-pulse" />;
+            }
+          })()}
+            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-primary">
+              {duration}
+            </span>
         </div>
 
         {/* Class Name Title */}
@@ -89,14 +98,14 @@ const FeaturedCard = ({ classData }) => {
 
           {/* Slots Availability */}
           <span
-            className={`text-[10px] md:text-xs font-bold tracking-wider uppercase ${slotsLeft === 0 ? 'text-neutral-light/40' : 'text-neutral-light'}`}
-          >
-            {slotsLeft === 0 ? 'Sold Out' : `${slotsLeft} Slots Left`}
-          </span>
+            className={`text-[10px] md:text-xs font-bold tracking-wider uppercase ${slots === 0 ? 'text-neutral-light/40' : 'text-neutral-light'}`}
+            >
+              {slots === 0 ? 'Sold Out' : `${slots} Slots Left`}
+            </span>
         </div>
       </div>
     </motion.div>
   );
 };
 
-export default FeaturedCard;
+export default FeaturedClassCard;

@@ -9,8 +9,9 @@ export const addForumPost = async data => {
   return res;
 };
 
-export const updateForumPost = async (id, data) => {
-  const res = await serverMutation(`/api/forum-post/${id}`, 'PATCH', data);
+export const editForumPost = async (postId, data) => {
+  const res = await serverMutation(`/api/forum-post/${postId}`, 'PATCH', data);
+  revalidatePath('/dashboard/trainer/forum');
   return res;
 };
 

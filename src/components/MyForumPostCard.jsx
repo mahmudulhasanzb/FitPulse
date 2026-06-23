@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Eye, Trash2 } from 'lucide-react';
 import { deleteForumPost } from '@/lib/api/forum/action';
 import Image from 'next/image';
+import ForumPostEditModal from './ForumPostEditModal';
 
 const MyForumPostCard = ({ post }) => {
   const formattedDate = post.createdAt
@@ -12,18 +13,6 @@ const MyForumPostCard = ({ post }) => {
         year: 'numeric',
       })
     : 'Oct 12, 2023';
-
-  // Simulated view count based on title hash to look dynamic and match mockup
-  const getViewsCount = title => {
-    if (!title) return '1.2K';
-    const hash = title
-      .split('')
-      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const num = (hash % 20) * 120 + 350;
-    return num >= 1000 ? (num / 1000).toFixed(1) + 'K' : num.toString();
-  };
-
-  const viewsCount = getViewsCount(post.title);
 
   return (
     <div className="relative group bg-[#13160B] border border-[#1C210E] hover:border-[#D4FF00]/40 rounded-3xl overflow-hidden transition-all duration-300 flex flex-col h-full shadow-xl">
@@ -72,11 +61,8 @@ const MyForumPostCard = ({ post }) => {
 
           {/* Footer Area */}
           <div className="flex items-center justify-between pt-4 border-t border-[#1C210E]/60 pointer-events-auto">
-            {/* Views counter */}
-            <div className="flex items-center gap-1.5 text-[10px] text-[#A4A896]/55 font-bold uppercase tracking-wider">
-              <Eye className="h-3.5 w-3.5 text-[#A4A896]/40" />
-              <span>{viewsCount} Views</span>
-            </div>
+            {/* Edit button */}
+            <ForumPostEditModal post={post} />
 
             {/* Delete form action */}
             <form action={deleteForumPost} className="relative z-20">

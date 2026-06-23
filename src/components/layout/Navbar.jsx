@@ -66,9 +66,11 @@ const Navbar = () => {
     const toastId = toast.loading('Signing out...');
     try {
       await authClient.signOut({
-        onSuccess: () => {
-          toast.success('Signed out successfully!', { id: toastId });
-          router.push('/login');
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success('Signed out successfully!', { id: toastId });
+            router.push('/login');
+          },
         },
       });
     } catch (error) {

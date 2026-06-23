@@ -11,7 +11,7 @@ import { getAllForumPosts } from '@/lib/api/forum/data';
 export const dynamic = 'force-dynamic';
 
 const ForumPosts = async () => {
-  const forumPosts = await getAllForumPosts();
+  const forumPosts = (await getAllForumPosts()) || [];
 
   return (
     <div className="bg-[#0A0D02] min-h-screen text-white px-6 py-10 md:px-12 md:py-16 font-sans">

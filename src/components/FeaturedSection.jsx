@@ -13,8 +13,13 @@ const FeaturedSection = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const data = await getPaginatedClasses();
-        setClassCards(data || []);
+        const res = await getPaginatedClasses();
+        const data = Array.isArray(res)
+          ? res
+          : Array.isArray(res?.data)
+            ? res.data
+            : [];
+        setClassCards(data);
       } catch (err) {
         console.error('Failed to fetch classes:', err);
       }
@@ -68,7 +73,7 @@ const FeaturedSection = () => {
           </motion.a>
         </div>
 
-                {/* Classes Grid */}
+        {/* Classes Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -78,9 +83,9 @@ const FeaturedSection = () => {
         >
           {/* Show only latest 3 classes */}
           {[...classCards]
-            .reverse()
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .slice(0, 3)
-            .map((classItem) => (
+            .map(classItem => (
               <motion.div key={classItem._id} variants={cardContainerVariants}>
                 <FeaturedClassCard classData={classItem} />
               </motion.div>

@@ -15,19 +15,23 @@ const FeaturedClassCard = ({ classData }) => {
     badge,
     badgeType,
     capacity,
+    totalEnrolment,
     bookingCount,
     category,
     icon,
   } = classData;
+console.log('class data:',classData);
+// console.log('class data detals:',);
 
-
+  const derivedIcon = icon || (category?.toLowerCase() === 'yoga' || category?.toLowerCase() === 'mindfulness' ? 'sprout' : category?.toLowerCase()?.includes('strength') || category?.toLowerCase()?.includes('power') ? 'dumbbell' : 'lightning');
+  const slots = Math.max(0, (capacity || 0) - (totalEnrolment || classData.totalEnrollment || 0));
 
   return (
     <motion.div className="bg-bg-card border border-white/5 rounded-2xl overflow-hidden flex flex-col h-full shadow-lg hover:shadow-2xl hover:border-primary/20 transition-all duration-300 group cursor-pointer">
       {/* Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-custom/10">
         <Image
-          src={imgSrc}
+          src={coverImage}
           alt={className}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
@@ -65,9 +69,9 @@ const FeaturedClassCard = ({ classData }) => {
                 return <Zap className="w-4 h-4 text-primary animate-pulse" />;
             }
           })()}
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-primary">
-              {duration}
-            </span>
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-primary">
+            {duration}
+          </span>
         </div>
 
         {/* Class Name Title */}
@@ -92,9 +96,9 @@ const FeaturedClassCard = ({ classData }) => {
           {/* Slots Availability */}
           <span
             className={`text-[10px] md:text-xs font-bold tracking-wider uppercase ${slots === 0 ? 'text-neutral-light/40' : 'text-neutral-light'}`}
-            >
-              {slots === 0 ? 'Sold Out' : `${slots} Slots Left`}
-            </span>
+          >
+            {slots === 0 ? 'Sold Out' : `${slots} Slots Left`}
+          </span>
         </div>
       </div>
     </motion.div>

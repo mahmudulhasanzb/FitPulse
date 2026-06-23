@@ -1,9 +1,17 @@
 import { serverFetch } from "../server";
 
-export const getAllClasses = async () => {
-  const res = await serverFetch('/api/classes');
+// export const getAllClasses = async () => {
+//   const res = await serverFetch('/api/classes');
+//   return res;
+// };
+
+export const getPaginatedClasses = async (page) => {
+  if (!page) {
+    page = 1;
+  }
+  const res = await serverFetch(`/api/classes?page=${page}`);
   return res;
-};
+}
 
 export const getClassById = async (id) => {
   const res = await serverFetch(`/api/classes/${id}`);

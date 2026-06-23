@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import FeaturedClassCard from './FeaturedClassCard';
 
 import { useState, useEffect } from 'react';
-import { getAllClasses } from '@/lib/api/classes/data';
+import { getPaginatedClasses } from '@/lib/api/classes/data';
 
 const FeaturedSection = () => {
   const [classCards, setClassCards] = useState([]);
@@ -13,7 +13,7 @@ const FeaturedSection = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const data = await getAllClasses();
+        const data = await getPaginatedClasses();
         setClassCards(data || []);
       } catch (err) {
         console.error('Failed to fetch classes:', err);

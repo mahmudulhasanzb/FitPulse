@@ -20,14 +20,7 @@ const FeaturedClassCard = ({ classData }) => {
     icon,
   } = classData;
 
-  // Determine image source
-  const imgSrc = image || coverImage || '/assets/images/default_class.png';
 
-  // Determine slots left based on capacity and bookings
-  const slots = (capacity != null && bookingCount != null) ? capacity - bookingCount : null;
-
-  // Determine icon based on category if not provided
-  const derivedIcon = icon || (category === 'HIIT' ? 'lightning' : category === 'Yoga' ? 'sprout' : category === 'Powerlifting' ? 'dumbbell' : 'lightning');
 
   return (
     <motion.div className="bg-bg-card border border-white/5 rounded-2xl overflow-hidden flex flex-col h-full shadow-lg hover:shadow-2xl hover:border-primary/20 transition-all duration-300 group cursor-pointer">

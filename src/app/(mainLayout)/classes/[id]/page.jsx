@@ -3,6 +3,8 @@ import RecomandedClasses from '@/components/RecomandedClasses';
 import { getClassById } from '@/lib/api/classes/data';
 import React from 'react';
 
+export const dynamic = 'force-dynamic';
+
 const ClassDetailsPage = async ({ params }) => {
   const { id } = await params;
   const classData = await getClassById(id);

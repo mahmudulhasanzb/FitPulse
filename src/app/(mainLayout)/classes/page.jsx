@@ -2,6 +2,8 @@ import React from 'react';
 import FilterClasses from '@/components/FilterClasses';
 import { getAllClasses } from '@/lib/api/classes/data';
 
+export const dynamic = 'force-dynamic';
+
 const AllClassesPage = async () => {
   // get actual classes data from server 
   const allClasses = await getAllClasses();

@@ -1,11 +1,11 @@
 import React from 'react';
-import { getAllClasses } from '@/lib/api/classes/data';
+import { getAllClass } from '@/lib/api/classes/data';
 import ClassCard from './ClassCard';
 
 const RecomandedClasses = async ({ category, currentClassId }) => {
   if (!category) return null;
 
-  const allClasses = await getAllClasses();
+  const allClasses = await getAllClass();
   if (!Array.isArray(allClasses)) return null;
 
   // Filter classes by the same category, excluding the current class

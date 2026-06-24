@@ -4,9 +4,11 @@ import React from 'react';
 import { Zap, Sprout, Dumbbell } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const FeaturedClassCard = ({ classData }) => {
   const {
+    _id,
     className,
     description,
     duration,
@@ -27,7 +29,8 @@ console.log('class data:',classData);
   const slots = Math.max(0, (capacity || 0) - (totalEnrolment || classData.totalEnrollment || 0));
 
   return (
-    <motion.div className="bg-bg-card border border-white/5 rounded-2xl overflow-hidden flex flex-col h-full shadow-lg hover:shadow-2xl hover:border-primary/20 transition-all duration-300 group cursor-pointer">
+    <Link href={`/classes/${_id}`}>
+      <motion.div className="bg-bg-card border border-white/5 rounded-2xl overflow-hidden flex flex-col h-full shadow-lg hover:shadow-2xl hover:border-primary/20 transition-all duration-300 group cursor-pointer">
       {/* Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-custom/10">
         <Image
@@ -102,6 +105,8 @@ console.log('class data:',classData);
         </div>
       </div>
     </motion.div>
+    </Link>
+  
   );
 };
 

@@ -27,7 +27,7 @@ const MyForumPosts = async () => {
           </div>
 
           <Link
-            href="/dashboard/trainer/forum/add-forum"
+            href="/dashboard/trainer/add-forum"
             className="inline-flex items-center justify-center gap-1.5 bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] font-black text-xs uppercase px-6 py-3.5 rounded hover:shadow-lg hover:shadow-[#D4FF00]/10 transition-all duration-200 select-none cursor-pointer self-start sm:self-auto"
           >
             <Plus className="h-4 w-4 stroke-[3px]" />

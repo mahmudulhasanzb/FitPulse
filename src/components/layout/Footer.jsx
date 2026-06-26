@@ -16,21 +16,29 @@ const Footer = () => {
               Professional fitness ecosystems designed for elite athletes and
               motivated beginners alike.
             </p>
+            {/* Contact Information */}
+            <div className="text-sm text-[#A4A896]/60 space-y-1">
+              <p>Email: contact@fitpulse.com</p>
+              <p>Phone: +1 (555) 019-9922</p>
+              <p>Address: 100 Fitness Way, San Francisco, CA</p>
+            </div>
             {/* Social Icons */}
             <div className="flex items-center space-x-5 pt-2">
+              <a
+                href="#"
+                className="text-[#A4A896]/60 hover:text-[#D4FF00] transition-colors duration-250 flex items-center justify-center"
+                aria-label="X (formerly Twitter)"
+              >
+                <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
               <a
                 href="#"
                 className="text-[#A4A896]/60 hover:text-[#D4FF00] transition-colors duration-250"
                 aria-label="Website"
               >
                 <Globe className="h-5 w-5 stroke-[1.8]" />
-              </a>
-              <a
-                href="#"
-                className="text-[#A4A896]/60 hover:text-[#D4FF00] transition-colors duration-250"
-                aria-label="Share"
-              >
-                <Share2 className="h-5 w-5 stroke-[1.8]" />
               </a>
               <a
                 href="#"

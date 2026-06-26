@@ -77,19 +77,15 @@ const classes = await getClassByEmail(session?.user?.email)
                         {cls.className}
                       </div>
                       <div className="text-[11px] text-[#A4A896]/50 mt-1">
-                        {cls?.schedule.map((schedule, index) => (
-                          <span key={index} className='text-xs text-[#A4A896]/50 mt-1'> {schedule +" " + '-'} </span>
-                        ))}
+                        {cls?.schedule?.join(' - ')}
                       </div>
                     </td>
 
                     {/* Category Tag */}
                     <td className="px-6 py-5 whitespace-nowrap">
                       <span
-                        className={`inline-block text-[9px] font-black tracking-widest border rounded px-2.5 py-1 $
-                      `}
+                        className={`inline-block text-[9px] font-black tracking-widest border rounded px-2.5 py-1 border-[#A4A896]/20 text-[#A4A896] bg-[#A4A896]/5`}
                       >
-                        {/* {cls.categoryStyle} inside className = `` */}
                         {cls.category}
                       </span>
                     </td>
@@ -97,11 +93,18 @@ const classes = await getClassByEmail(session?.user?.email)
                     {/* Status Badge */}
                     <td className="px-6 py-5 whitespace-nowrap">
                       <div
-                        className={`inline-flex items-center gap-1.5 text-[9px] font-black tracking-widest border rounded px-3 py-1 $`}
+                        className={`inline-flex items-center gap-1.5 text-[9px] font-black tracking-widest border rounded px-3 py-1 ${
+                          cls.status === 'Approved'
+                            ? 'border-[#D4FF00]/30 text-[#D4FF00] bg-[#D4FF00]/5'
+                            : cls.status === 'Rejected'
+                            ? 'border-red-500/30 text-red-400 bg-red-500/5'
+                            : 'border-yellow-500/30 text-yellow-400 bg-yellow-500/5'
+                        }`}
                       >
-                        {/* {cls.statusStyle} inside the className = `` */}
                         {cls.status === 'Approved' ? (
                           <CheckCircle2 className="h-3 w-3 text-[#D4FF00]" />
+                        ) : cls.status === 'Rejected' ? (
+                          <AlertCircle className="h-3 w-3 text-red-400" />
                         ) : (
                           <AlertCircle className="h-3 w-3 text-yellow-400" />
                         )}

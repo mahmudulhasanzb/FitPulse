@@ -1,11 +1,16 @@
-import React from 'react'
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { getTrainerApplicationByEmail } from '@/lib/api/trainer-applications/data';
+import ApplyAsTrainerClient from './ApplyAsTrainerClient';
 
-const ApplyAsTrainerPage = () => {
-  return (
-    <div>
-      <h1>Apply As Trainer</h1>
-    </div>
-  )
-}
+const ApplyAsTrainerPage = async () => {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) redirect('/login');
+  const email = session.user.email;
+  const existing = await getTrainerApplicationByEmail(email);
 
-export default ApplyAsTrainerPage
+  return <ApplyAsTrainerClient existing={existing} />;
+};
+
+export default ApplyAsTrainerPage;

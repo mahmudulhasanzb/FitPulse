@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 // BlurInText helper to animate characters on viewport enter
 const BlurInText = ({ text, className = '', style = {}, delayOffset = 0 }) => {
@@ -94,14 +95,14 @@ const CTASection = () => {
               whileTap={{ scale: 0.98 }}
               className="w-full sm:w-auto px-8 py-3.5 bg-primary text-black font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 transform cursor-pointer text-sm"
             >
-              Create Free Account
+              <Link href={'/signup'}> Create Free Account</Link>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.03, backgroundColor: '#f3f4f6' }}
               whileTap={{ scale: 0.98 }}
               className="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 transform cursor-pointer text-sm"
             >
-              Browse Classes
+              <Link href={'/classes'}>Browse Classes</Link>
             </motion.button>
           </div>
         </div>

@@ -41,7 +41,7 @@ const ForumPostsFilter = async () => {
           </button>
           {/* New Post Button */}
           <Link
-            href={`/dashboard/${role}/forum/add-forum`}
+            href={`/dashboard/${role}/add-forum`}
             className="inline-flex items-center justify-center gap-1.5 bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] font-black text-[10px] tracking-widest uppercase px-5 py-3.5 rounded hover:shadow-lg hover:shadow-[#D4FF00]/10 transition-all duration-200 select-none cursor-pointer"
           >
             <Plus className="h-3.5 w-3.5 stroke-[3px]" />

@@ -45,6 +45,14 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/classes?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchExpanded(false);
+    }
+  };
+
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -83,8 +91,11 @@ const Navbar = () => {
     { label: 'Home', href: '/' },
     { label: 'All Classes', href: '/classes' },
     { label: 'Community Forum', href: '/forum-posts' },
-    { label: 'Dashboard', href: '/dashboard' },
   ];
+
+  if (user) {
+    navLinks.push({ label: 'Dashboard', href: '/dashboard' });
+  }
 
   const isLinkActive = href => pathname === href;
 
@@ -132,7 +143,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <div ref={searchRef} className="relative flex items-center">
               {/* Desktop Search */}
-              <div className="hidden lg:block relative">
+              <form onSubmit={handleSearchSubmit} className="hidden lg:block relative">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                   <Search className="h-4 w-4 text-[#A4A896]/50" />
                 </div>
@@ -140,10 +151,10 @@ const Navbar = () => {
                   type="text"
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search discussions..."
+                  placeholder="Search classes..."
                   className="w-56 bg-[#14180A] border border-[#282F18] rounded-full py-2 pl-9 pr-4 text-sm text-white placeholder-[#A4A896]/45 focus:outline-none focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]/30 transition-all duration-200"
                 />
-              </div>
+              </form>
 
               {/* Tablet Search */}
               <div className="block lg:hidden">
@@ -156,7 +167,7 @@ const Navbar = () => {
                     <Search className="h-5 w-5 text-[#A2B28C] hover:text-[#D4FF00] transition-colors duration-200" />
                   </button>
                 ) : (
-                  <div className="flex items-center space-x-2 animate-fade-in">
+                  <form onSubmit={handleSearchSubmit} className="flex items-center space-x-2 animate-fade-in">
                     <div className="relative">
                       <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                         <Search className="h-4 w-4 text-[#A4A896]/50" />
@@ -166,17 +177,18 @@ const Navbar = () => {
                         autoFocus
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
-                        placeholder="Search discussions..."
+                        placeholder="Search classes..."
                         className="w-48 sm:w-56 bg-[#14180A] border border-[#282F18] rounded-full py-2 pl-9 pr-4 text-sm text-white placeholder-[#A4A896]/45 focus:outline-none focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]/30 transition-all duration-200"
                       />
                     </div>
                     <button
+                      type="button"
                       onClick={() => setIsSearchExpanded(false)}
                       className="p-2.5 bg-[#14180A] border border-[#282F18] hover:border-red-500/50 hover:text-red-400 rounded-xl text-[#A4A896]/70 cursor-pointer transition-all duration-200"
                     >
                       <X className="h-4 w-4" />
                     </button>
-                  </div>
+                  </form>
                 )}
               </div>
             </div>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Flame, ArrowRight, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NumberTicker from './NumberTicker';
+import Link from 'next/link';
 
 // FlipWords component - splits words into letters and animates them with exit effects
 export const FlipWords = ({
@@ -267,7 +268,7 @@ const Banner = () => {
               whileTap={{ scale: 0.98 }}
               className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-8 py-3.5 bg-primary text-black hover:text-black font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 transform cursor-pointer text-sm"
             >
-              <span>Get Started</span>
+              <Link href='/classes'>Get Started</Link>
               <ArrowRight className="w-4 h-4 stroke-[3]" />
             </motion.button>
             <motion.button 
@@ -275,7 +276,7 @@ const Banner = () => {
               whileTap={{ scale: 0.98 }}
               className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border-2 border-primary/20 text-white font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 transform cursor-pointer text-sm"
             >
-              <span>View Classes</span>
+              <Link href={'/forum-posts'}>View Communinty Post</Link>
             </motion.button>
           </motion.div>
 

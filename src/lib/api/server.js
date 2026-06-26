@@ -1,20 +1,19 @@
 import { baseUrl } from "./baseUrl"
 
-export const serverMutation = async (path, method, data) => {
-  const formattedPath = path.startsWith('/') ? path : `/${path}`;
-  const res = await fetch(`${baseUrl}${formattedPath}`, {
-    method: method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-  return res.json()
-}
-
 export const serverFetch = async (path) => {
   const formattedPath = path.startsWith('/') ? path : `/${path}`;
-  const res = await fetch(`${baseUrl}${formattedPath}`)
+  const res = await fetch(`${baseUrl}${formattedPath}`, { cache: 'no-store' });
   
-  return res.json()
+  if (!res.ok) {
+    console.error(`Fetch error: ${res.status} ${res.statusText} for ${formattedPath}`);
+    return null;
+  }
+  
+  const text = await res.text();
+  try {
+    return text ? JSON.parse(text) : null;
+  } catch (error) {
+    console.error(`JSON parse error for ${formattedPath}:`, error);
+    return null;
+  }
 }

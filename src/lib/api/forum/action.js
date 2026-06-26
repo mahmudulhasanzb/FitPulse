@@ -1,6 +1,6 @@
 'use server';
 
-import { serverMutation } from '../server';
+import { serverMutation } from '../mutation';
 
 import { revalidatePath } from 'next/cache';
 

@@ -92,13 +92,11 @@ const ClassCard = ({ classData }) => {
           </div>
         </div>
 
-        {/* Author Role */}
-        {authorRole && (
-          <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-bold text-neutral-light/70 uppercase tracking-widest mb-3.5">
-            <Shield className="w-3.5 h-3.5 text-primary" />
-            <span>BY {authorRole}</span>
-          </div>
-        )}
+        {/* Author / Trainer */}
+        <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-bold text-neutral-light/70 uppercase tracking-widest mb-3.5">
+          <Shield className="w-3.5 h-3.5 text-primary" />
+          <span>BY {classData.authorName || 'ELITE TRAINER'} ({authorRole || 'Trainer'})</span>
+        </div>
 
         {/* Duration, Difficulty & Enrollment Grid */}
         <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-4 mb-6">

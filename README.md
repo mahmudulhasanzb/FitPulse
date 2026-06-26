@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FitPulse
 
-## Getting Started
+FitPulse is a full-stack fitness platform where users can discover, book, and manage fitness classes. It supports three roles: **Member**, **Trainer**, and **Admin** — each with tailored dashboards and capabilities.
 
-First, run the development server:
+## Live URL
+
+[FitPulse Live](https://fit-pulse-gym.vercel.app)
+
+## Key Features
+
+- Role-based authentication (Member, Trainer, Admin) with Better Auth
+- Google OAuth login
+- Browse and search fitness classes with server-side filtering
+- Book classes via Stripe payment integration
+- Add classes to favorites
+- Community forum with comments, likes, and dislikes
+- Trainer applications with admin approval/rejection workflow
+- Admin dashboard for managing users, trainers, classes, and forum posts
+- Server-side pagination on classes and forum pages
+- Responsive design with dark theme
+- Framer Motion animations throughout
+
+## Tech Stack
+
+- **Frontend:** Next.js, React, Tailwind CSS, Framer Motion
+- **Backend:** Express.js, MongoDB
+- **Authentication:** Better Auth
+- **Payments:** Stripe
+- **Image Upload:** ImgBB
+
+## npm Packages
+
+### Client
+- `next` - React framework
+- `react`, `react-dom` - UI library
+- `better-auth` - Authentication
+- `framer-motion` - Animations
+- `lucide-react` - Icons
+- `stripe`, `@stripe/stripe-js` - Payments
+- `react-hook-form` - Form handling
+- `react-hot-toast` - Notifications
+- `mongodb` - Database driver
+
+### Server
+- `express` - Web framework
+- `mongodb` - Database driver
+- `cors` - Cross-origin requests
+- `dotenv` - Environment variables
+- `jose`, `jose-cjs` - JWT verification
+- `stripe` - Payment processing
+
+## Environment Variables
+
+### Client (.env)
+- `NEXT_PUBLIC_API_URL` - Backend server URL
+- `BETTER_AUTH_URL` - App URL for auth
+- `BETTER_AUTH_SECRET` - Auth secret
+- `MONGO_DB_URI` - MongoDB connection string
+- `GOOGLE_CLIENT_ID` - Google OAuth client ID
+- `GOOGLE_CLIENT_SECRET` - Google OAuth secret
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Stripe publishable key
+- `STRIPE_SECRET_KEY` - Stripe secret key
+- `NEXT_PUBLIC_IMGBB_API_KEY` - ImgBB API key
+
+### Server (.env)
+- `PORT` - Server port
+- `MONGO_DB_URI` - MongoDB connection string
+- `CLIENT_URL` - Client app URL
+- `STRIPE_SECRET_KEY` - Stripe secret key
+
+## Setup
 
 ```bash
+# Install server dependencies
+cd fitpulse-server
+npm install
+
+# Install client dependencies
+cd fitpulse
+npm install
+
+# Start server
+cd fitpulse-server
+npm start
+
+# Start client
+cd fitpulse
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

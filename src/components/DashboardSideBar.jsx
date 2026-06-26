@@ -15,6 +15,7 @@ import {
   PlusCircle,
   Plus,
   MessageCircle,
+  DollarSign,
 } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
@@ -67,15 +68,50 @@ const trainerMenuItem = [
   {
     label: 'My Forum Posts',
     href: '/dashboard/trainer/forum',
-    icon: MessageCircle,  
+    icon: MessageCircle,
   },
 ];
 
 const adminMenu = [
+  { label: 'Overview', 
+    href: '/dashboard/admin', 
+    icon: Home
+  },
+
+  { label: 'Manage Users', 
+    href: '/dashboard/admin/users', 
+    icon: User
+  },
+  { label: 'Manage Trainers', 
+    href: '/dashboard/admin/trainers', 
+    icon: User
+  },
+
   {
-    label: 'Overview',
-    href: '/dashboard/admin',
-    icon: Home,
+    label: 'Manage Classes',
+    href: '/dashboard/admin/classes',
+    icon: Bookmark,
+  },
+  {
+    label: 'Applied Trainers',
+    href: '/dashboard/admin/applied-trainers',
+    icon: Briefcase,
+  },
+  {
+    label: 'Manage Forum Posts',
+    href: '/dashboard/admin/forum',
+    icon: MessageCircle,
+  },
+  {
+    label: 'Add Forum Posts',
+    href: '/dashboard/admin/add-forum',
+    icon: Plus
+  },
+
+  {
+    label: 'Transactions',
+    href: '/dashboard/admin/transactions',
+    icon: DollarSign,
   },
 ];
 

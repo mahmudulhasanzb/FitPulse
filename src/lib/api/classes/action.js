@@ -1,10 +1,11 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
-import { serverFetch, serverMutation } from "../server"
+import { serverMutation } from "../mutation";
 
 export const addClasses = async (data) => {
   const res = await serverMutation('/api/trainer', 'POST', data);
+  revalidatePath('/dashboard/trainer/classes');
   return res
 }
 

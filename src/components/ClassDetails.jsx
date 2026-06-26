@@ -176,7 +176,7 @@ const ClassDetails = ({ classData }) => {
               </div>
 
               {/* Actions Area */}
-              <ClassDetailsActions classId={_id} />
+              <ClassDetailsActions classId={_id} className={className} classImage={coverImage} />
 
               {/* Schedule Bottom Box */}
               <div className="bg-white/5 border border-white/5 px-4 py-4 rounded-xl space-y-2 text-left">

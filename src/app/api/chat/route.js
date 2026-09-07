@@ -32,9 +32,11 @@ Your goals:
 5. Remind users to stay hydrated and warm up properly.`
     });
 
-    // Format previous messages for Gemini startChat history
-    // Roles in Gemini must be 'user' or 'model'
-    const history = messages.slice(0, -1).map((msg) => ({
+    // Gemini startChat requires history to start with a 'user' turn (not 'model')
+    const previousMessages = messages.slice(0, -1);
+    const firstUserIndex = previousMessages.findIndex((m) => m.role === "user");
+
+    const history = (firstUserIndex === -1 ? [] : previousMessages.slice(firstUserIndex)).map((msg) => ({
       role: msg.role === "user" ? "user" : "model",
       parts: [{ text: msg.content }]
     }));

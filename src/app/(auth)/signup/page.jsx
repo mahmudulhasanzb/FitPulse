@@ -5,8 +5,6 @@ import Link from 'next/link';
 import {
   Camera,
   Plus,
-  GraduationCap,
-  Dumbbell,
   Check,
   Eye,
   EyeOff,
@@ -20,7 +18,6 @@ import { useRouter } from 'next/navigation';
 
 export default  function SignupPage() {
   const router = useRouter();
-  const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
   const fileInputRef = useRef(null);
@@ -64,18 +61,13 @@ export default  function SignupPage() {
     }
   };
 
-  const handleRoleSelect = selectedRole => {
-    setRole(selectedRole);
-    setValue('role', selectedRole);
-  };
-
   const onSubmit = async data => {
     const { data: response, error } = await authClient.signUp.email(
       {
         name: data.name,
         email: data.email,
         password: data.password,
-        role: role,
+        role: 'student',
         image: photoPreview || '',
       },
       {
@@ -199,39 +191,6 @@ export default  function SignupPage() {
             )}
           </div>
 
-          {/* Account Type Tab Selector */}
-          <div className="space-y-2">
-            <label className="block text-[11px] font-extrabold text-[#A4A896]/70 uppercase tracking-widest">
-              Account Type
-            </label>
-            <div className="grid grid-cols-2 gap-4">
-              <button
-                type="button"
-                onClick={() => handleRoleSelect('student')}
-                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                  role === 'student'
-                    ? 'bg-[#D4FF00]/5 border-[#D4FF00] text-[#D4FF00]'
-                    : 'bg-[#14180A]/40 border-[#282F18] text-[#A4A896]/60 hover:text-white hover:border-[#3B3E31]'
-                }`}
-              >
-                <GraduationCap className="w-4 h-4 stroke-[2]" />
-                <span>Student</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleRoleSelect('trainer')}
-                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                  role === 'trainer'
-                    ? 'bg-[#D4FF00]/5 border-[#D4FF00] text-[#D4FF00]'
-                    : 'bg-[#14180A]/40 border-[#282F18] text-[#A4A896]/60 hover:text-white hover:border-[#3B3E31]'
-                }`}
-              >
-                <Dumbbell className="w-4 h-4 stroke-[2]" />
-                <span>Trainer</span>
-              </button>
-            </div>
-            <input type="hidden" {...register('role')} />
-          </div>
 
           {/* Password Field */}
           <div className="space-y-2">

@@ -27,11 +27,11 @@ const MyForumPostCard = ({ post }) => {
         {/* Card Image Cover */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0A0D02]">
           {post.image ? (
-            <img
+            <Image
               src={post.image}
               alt={post.title}
-              // width={500}
-              // height={500}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (

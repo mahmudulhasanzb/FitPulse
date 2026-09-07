@@ -14,6 +14,9 @@ const PaymentPage = async ({ searchParams }) => {
   if (!session) {
     redirect('/login');
   }
+  if (session.user?.role === 'admin') {
+    redirect('/classes');
+  }
 
   const { classId } = await searchParams;
   if (!classId) {

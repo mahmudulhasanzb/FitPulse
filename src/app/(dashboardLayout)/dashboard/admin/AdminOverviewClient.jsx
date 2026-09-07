@@ -3,6 +3,7 @@
 import React from 'react';
 import { useSession } from '@/lib/auth-client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   Users, Dumbbell, User, Mail, Star, Clock, Sparkles, ChevronRight, PlusCircle, DollarSign, BookOpen,
 } from 'lucide-react';
@@ -90,7 +91,7 @@ const AdminOverviewClient = ({ stats }) => {
           </div>
           <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-[#1C210E] p-1 bg-[#14180A]/60">
             {user?.image ? (
-              <img src={user.image} alt="" className="w-full h-full object-cover rounded-full" />
+              <Image src={user.image} alt="" width={112} height={112} className="w-full h-full object-cover rounded-full" />
             ) : (
               <div className="w-full h-full rounded-full bg-[#1C210E] flex items-center justify-center">
                 <User className="h-10 w-10 text-[#A4A896]/60" />

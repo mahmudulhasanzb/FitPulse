@@ -210,9 +210,11 @@ const Navbar = () => {
                   >
                     <div className="w-8 h-8 rounded-full overflow-hidden bg-[#282F18] flex items-center justify-center border border-[#3B3E31]">
                       {user?.image ? (
-                        <img
+                        <Image
                           src={user.image}
                           alt="User avatar"
+                          width={32}
+                          height={32}
                           className="w-full h-full object-cover"
                         />
                       ) : (
@@ -374,9 +376,11 @@ const Navbar = () => {
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 rounded-full overflow-hidden bg-[#282F18] flex items-center justify-center border border-[#3B3E31]">
                     {user.image ? (
-                      <img
+                      <Image
                         src={user.image}
                         alt="User avatar"
+                        width={40}
+                        height={40}
                         className="w-full h-full object-cover"
                       />
                     ) : (

@@ -13,15 +13,13 @@ const FeaturedSection = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const res = await getPaginatedClasses();
+        const res = await getPaginatedClasses(1, 10, 'booked');
         const data = Array.isArray(res)
           ? res
           : Array.isArray(res?.data)
             ? res.data
             : [];
-        // Sort by totalEnrollment (booking count) descending for featured
-        const sorted = [...data].sort((a, b) => (b.totalEnrollment || 0) - (a.totalEnrollment || 0));
-        setClassCards(sorted);
+        setClassCards(data);
       } catch (err) {
         console.error('Failed to fetch classes:', err);
       }
@@ -67,8 +65,7 @@ const FeaturedSection = () => {
           viewport={{ once: true, margin: '-80px' }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {[...classCards]
-            .sort((a, b) => (b.totalEnrollment || 0) - (a.totalEnrollment || 0))
+          {classCards
             .slice(0, 3)
             .map(classItem => (
               <motion.div key={classItem._id} variants={cardContainerVariants}>

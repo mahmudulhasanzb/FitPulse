@@ -7,6 +7,7 @@ import { uploadImage } from '@/lib/uploadImage';
 import { updateClasses } from '@/lib/api/classes/action';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const EditClassModal = ({ classData }) => {
   const router = useRouter();
@@ -163,10 +164,13 @@ const EditClassModal = ({ classData }) => {
                 </label>
                 <div className="flex gap-4 items-center border border-[#282F18] rounded-2xl p-4 bg-[#0A0D02]/40">
                   {imageUrl ? (
-                    <img
+                    <Image
                       src={imageUrl}
                       alt="Cover Preview"
+                      width={96}
+                      height={64}
                       className="w-24 h-16 object-cover rounded-lg border border-[#282F18]"
+                      unoptimized
                     />
                   ) : (
                     <div className="w-24 h-16 bg-[#13160B] rounded-lg border border-dashed border-[#282F18] flex items-center justify-center text-[#A4A896]/30 text-xs">

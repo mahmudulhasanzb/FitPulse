@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Shield, ShieldOff, Star, Mail, User, Search, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { updateUser } from '@/lib/api/mutations/actions';
@@ -76,7 +77,7 @@ const ManageUsersClient = ({ users }) => {
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-[#282F18] flex items-center justify-center overflow-hidden">
                           {u.image ? (
-                            <img src={u.image} alt="" className="w-full h-full object-cover" />
+                            <Image src={u.image} alt="" width={32} height={32} className="w-full h-full object-cover" />
                           ) : (
                             <User className="h-4 w-4 text-[#A4A896]" />
                           )}

@@ -4,6 +4,7 @@ import React from 'react';
 import { Heart, Trash2, Sparkles, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { deleteFavorite } from '@/lib/api/mutations/actions';
@@ -47,8 +48,8 @@ const FavouriteClassesClient = ({ favorites }) => {
                 className="relative group bg-[#13160B] border border-[#1C210E] hover:border-[#D4FF00]/40 rounded-3xl overflow-hidden transition-all duration-300"
               >
                 {f.classImage && (
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img src={f.classImage} alt={f.className} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="aspect-[16/10] overflow-hidden relative">
+                    <Image src={f.classImage} alt={f.className} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                 )}
                 <div className="p-5">

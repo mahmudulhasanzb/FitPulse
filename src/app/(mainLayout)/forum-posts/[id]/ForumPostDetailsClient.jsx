@@ -139,7 +139,7 @@ const ForumPostDetailsClient = ({ post, postId }) => {
     <div className="flex-1 bg-[#0A0D02] min-h-screen text-white overflow-y-auto font-sans">
       <div className="relative w-full aspect-[21/9] md:aspect-[24/8] min-h-[320px] bg-black">
         {post.image ? (
-          <img src={post.image} alt={post.title} className="w-full h-full object-cover opacity-60" />
+          <Image src={post.image} alt={post.title} fill className="w-full h-full object-cover opacity-60" />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-[#13160B] to-[#0A0D02]" />
         )}
@@ -222,7 +222,7 @@ const ForumPostDetailsClient = ({ post, postId }) => {
             <form onSubmit={handleAddComment} className="mb-10 flex gap-3">
               <div className="w-9 h-9 rounded-full bg-[#282F18] overflow-hidden flex-shrink-0 mt-1">
                 {user.image ? (
-                  <img src={user.image} alt="" className="w-full h-full object-cover" />
+                  <Image src={user.image} alt="" width={36} height={36} className="w-full h-full object-cover" />
                 ) : (
                   <User className="h-5 w-5 text-[#A4A896] m-2" />
                 )}
@@ -253,7 +253,7 @@ const ForumPostDetailsClient = ({ post, postId }) => {
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-[#282F18] overflow-hidden flex-shrink-0">
                     {comment.userImage ? (
-                      <img src={comment.userImage} alt="" className="w-full h-full object-cover" />
+                      <Image src={comment.userImage} alt="" width={32} height={32} className="w-full h-full object-cover" />
                     ) : (
                       <User className="h-4 w-4 text-[#A4A896] m-2" />
                     )}

@@ -14,6 +14,10 @@ const ClassDetailsActions = ({ classId, className, classImage }) => {
   const { data: session } = useSession();
   const user = session?.user;
 
+  if (user?.role === 'admin') {
+    return null;
+  }
+
   const [booked, setBooked] = useState(false);
   const [favorited, setFavorited] = useState(false);
   const [favId, setFavId] = useState(null);

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { User, Mail, Clock, X, Sparkles, CheckCircle2, XCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { approveTrainerApplication } from '@/lib/api/mutations/actions';
@@ -65,7 +66,7 @@ const AppliedTrainersClient = ({ applications }) => {
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-[#282F18] flex items-center justify-center overflow-hidden">
                           {a.userImage ? (
-                            <img src={a.userImage} alt="" className="w-full h-full object-cover" />
+                            <Image src={a.userImage} alt="" width={32} height={32} className="w-full h-full object-cover" />
                           ) : (
                             <User className="h-4 w-4 text-[#A4A896]" />
                           )}
@@ -114,7 +115,7 @@ const AppliedTrainersClient = ({ applications }) => {
               <div className="flex items-center gap-3 pb-4 border-b border-[#1C210E]">
                 <div className="w-12 h-12 rounded-full bg-[#282F18] overflow-hidden">
                   {selected.userImage ? (
-                    <img src={selected.userImage} alt="" className="w-full h-full object-cover" />
+                    <Image src={selected.userImage} alt="" width={48} height={48} className="w-full h-full object-cover" />
                   ) : (
                     <User className="h-6 w-6 text-[#A4A896] m-3" />
                   )}

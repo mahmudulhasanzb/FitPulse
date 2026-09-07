@@ -6,6 +6,13 @@ FitPulse is a full-stack fitness platform where users can discover, book, and ma
 
 [FitPulse Live](https://fit-pulse-gym.vercel.app)
 
+Admin Email: admin@gmail.com
+Admin Password: Admin123
+Live Site Link: https://fit-pulse-gym.vercel.app
+Github Repository (Server): https://github.com/mahmudulhasanzb/FitPulse-Server.git
+Github Repository (Client): https://github.com/mahmudulhasanzb/FitPulse.git
+
+
 ## Key Features
 
 - Role-based authentication (Member, Trainer, Admin) with Better Auth

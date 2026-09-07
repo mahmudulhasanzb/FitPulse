@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Upload, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { useSession } from '@/lib/auth-client';
 import { uploadImage } from '@/lib/uploadImage';
@@ -179,10 +180,12 @@ const AddNewForumPost = () => {
 
                 {imageUrl ? (
                   <div className="absolute inset-0 w-full h-full group">
-                    <img
+                    <Image
                       src={imageUrl}
                       alt="Asset Preview"
+                      fill
                       className="w-full h-full object-cover"
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center space-y-2">
                       <label

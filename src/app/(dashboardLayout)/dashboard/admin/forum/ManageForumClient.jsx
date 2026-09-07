@@ -3,6 +3,7 @@
 import React from 'react';
 import { Trash2, MessageCircle, User, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { deleteForumPost } from '@/lib/api/forum/action';
@@ -57,7 +58,7 @@ const ManageForumClient = ({ posts }) => {
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-full bg-[#282F18] overflow-hidden flex-shrink-0">
                           {p.authorImage ? (
-                            <img src={p.authorImage} alt="" className="w-full h-full object-cover" />
+                            <Image src={p.authorImage} alt="" width={24} height={24} className="w-full h-full object-cover" />
                           ) : (
                             <User className="h-3 w-3 text-[#A4A896] m-1.5" />
                           )}

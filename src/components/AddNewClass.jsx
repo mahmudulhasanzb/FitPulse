@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Upload,
   Clock,
@@ -134,10 +135,12 @@ const AddNewClass = () => {
 
             {imageUrl ? (
               <div className="absolute inset-0 w-full h-full group">
-                <img
+                <Image
                   src={imageUrl}
                   alt="Cover Preview"
+                  fill
                   className="w-full h-full object-cover"
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center space-y-2">
                   <label

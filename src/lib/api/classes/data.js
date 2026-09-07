@@ -5,11 +5,12 @@ export const getAllClass = async () => {
   return res;
 };
 
-export const getPaginatedClasses = async (page) => {
-  if (!page) {
-    page = 1;
+export const getPaginatedClasses = async (page = 1, limit = 10, sort = '') => {
+  const query = new URLSearchParams({ page, limit });
+  if (sort) {
+    query.set('sort', sort);
   }
-  const res = await serverFetch(`/api/classes?page=${page}`);
+  const res = await serverFetch(`/api/classes?${query.toString()}`);
   return res;
 }
 

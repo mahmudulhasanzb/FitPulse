@@ -26,7 +26,7 @@ const INITIAL_MESSAGES = [
   {
     role: "model",
     content:
-      "Hey champion! 🏋️ I'm your **FitPulse AI Coach**. Ask me about workout routines, nutrition advice, exercise form, or finding the right fitness class!",
+      "Hey champion! 🏋️ I'm FitPulse AI Coach. Ask me about workout routines, nutrition advice, or fitness goals!",
   },
 ];
 
@@ -75,7 +75,7 @@ export default function AIChatBot() {
         {
           role: "model",
           content:
-            "⚠️ Sorry, I encountered an issue connecting to my brain. Please ensure the `GEMINI_API_KEY` is configured in your `.env` file.",
+            "⚠️ Sorry, somewhere went wrong. Please try again later.",
         },
       ]);
     } finally {
@@ -161,17 +161,14 @@ export default function AIChatBot() {
                   <div className="w-9 h-9 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary">
                     <Bot className="w-5 h-5" />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-primary rounded-full ring-2 ring-bg-dark"></span>
+                  
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
                     FitPulse AI Coach
-                    <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
-                      Gemini
-                    </span>
                   </h3>
                   <p className="text-[11px] text-neutral-light">
-                    Online • Workouts, Nutrition & Form
+                  Ask about Workout plans, Nutrition & Fitness Goals.
                   </p>
                 </div>
               </div>
@@ -246,7 +243,7 @@ export default function AIChatBot() {
                   </div>
                   <div className="bg-secondary/90 border border-white/10 rounded-2xl rounded-tl-xs px-3.5 py-2.5 flex items-center gap-2 text-neutral-light text-xs">
                     <Loader2 className="w-3.5 h-3.5 animate-spin text-primary" />
-                    <span>Coach is crafting your answer...</span>
+                    <span>AI Coach is crafting your answer...</span>
                   </div>
                 </div>
               )}
@@ -296,7 +293,7 @@ export default function AIChatBot() {
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="p-2.5 bg-primary text-secondary rounded-xl hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center flex-shrink-0"
+                  className="p-2.5 bg-primary text-secondary rounded-xl hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center flex-shrink-0 cursor-pointer"
                   aria-label="Send message"
                 >
                   <Send className="w-4 h-4" />
@@ -304,7 +301,7 @@ export default function AIChatBot() {
               </form>
               <div className="flex items-center justify-between mt-2 px-1 text-[10px] text-neutral-light/60">
                 <span>FitPulse Coach AI</span>
-                <span>Powered by Gemini</span>
+                <span>AI can make mistakes. Please verify important info!</span>
               </div>
             </div>
           </motion.div>

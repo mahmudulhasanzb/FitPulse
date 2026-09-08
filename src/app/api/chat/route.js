@@ -1,58 +1,45 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { streamText, convertToModelMessages } from 'ai';
+
+// Support both GEMINI_API_KEY and GOOGLE_GENERATIVE_AI_API_KEY
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 export async function POST(req) {
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      return Response.json(
-        { error: "GEMINI_API_KEY is not configured in .env" },
-        { status: 500 }
-      );
-    }
-
-    const body = await req.json();
-    const { messages } = body;
+    const { messages } = await req.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return Response.json(
-        { error: "Valid messages array is required." },
-        { status: 400 }
+        { error: 'Valid messages array is required.' },
+        { status: 400 },
       );
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-3.6-flash",
-      systemInstruction: `You are "FitPulse Coach", an energetic, elite personal trainer and wellness AI assistant built into the FitPulse platform.
+    // Convert UI messages (with parts) to Model messages format
+    const modelMessages = await convertToModelMessages(messages);
+
+    const result = streamText({
+      model: google('gemini-3.6-flash'),
+      system: `You are "FitPulse Coach", an energetic, elite personal trainer and wellness AI assistant built into the FitPulse platform.
 Your goals:
 1. Provide practical, science-backed workout splits, exercise form tips, calorie/macro breakdowns, and recovery advice.
 2. Direct users to FitPulse platform features (Classes, Trainer booking, Community Forum, Subscription plans).
 3. Maintain an energetic, motivating, and friendly gym coach tone.
 4. Keep responses crisp, well-formatted with bullet points and bold highlights.
-5. Remind users to stay hydrated and warm up properly.`
+5. Remind users to stay hydrated and warm up properly.
+6. if the user asks to "book a class" or this type of words then instruct him to visit "https://fitpulse-gym-management.vercel.app/classes" for booking a class.
+7. if the user ask any irrelevant question then ignore it and say that "Umm, Actually I am here to help you with your fitness journey, and I think this question "{user_question}" is irrelevant to fitness. So, please ask me anything related to fitness." `,
+      messages: modelMessages,
     });
 
-    // Gemini startChat requires history to start with a 'user' turn (not 'model')
-    const previousMessages = messages.slice(0, -1);
-    const firstUserIndex = previousMessages.findIndex((m) => m.role === "user");
-
-    const history = (firstUserIndex === -1 ? [] : previousMessages.slice(firstUserIndex)).map((msg) => ({
-      role: msg.role === "user" ? "user" : "model",
-      parts: [{ text: msg.content }]
-    }));
-
-    const chat = model.startChat({ history });
-    const lastUserMessage = messages[messages.length - 1]?.content || "";
-
-    const result = await chat.sendMessage(lastUserMessage);
-    const reply = result.response.text();
-
-    return Response.json({ reply });
+    return result.toUIMessageStreamResponse();
   } catch (error) {
-    console.error("FitPulse AI Chat Error:", error);
+    console.error('FitPulse AI Chat Error:', error);
     return Response.json(
-      { error: error?.message || "Failed to get response from Gemini AI." },
-      { status: 500 }
+      { error: error?.message || 'Failed to stream response from AI Coach.' },
+      { status: 500 },
     );
   }
 }

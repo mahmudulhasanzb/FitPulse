@@ -126,20 +126,16 @@ export default function AIChatBot() {
       <div className="fixed bottom-6 right-6 z-50">
         {!isOpen && (
           <div className="relative">
-            <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-primary"></span>
-            </span>
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open FitPulse AI Chatbot"
-              className="group flex items-center gap-2.5 px-4 py-3 bg-bg-card border-2 border-primary/40 hover:border-primary text-foreground rounded-full shadow-2xl hover:shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+              className="group flex items-center gap-2.5 px-4 py-3 bg-bg-card border-2 border-primary/40 hover:border-primary text-foreground rounded-full shadow-2xl hover:shadow-primary/20 hover:scale-104 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-colors">
                 <Bot className="w-5 h-5" />
               </div>
               <span className="text-sm font-semibold tracking-wide hidden sm:inline text-foreground">
-                Ask Coach AI
+                Fipulse Coach AI
               </span>
               <Sparkles className="w-4 h-4 text-primary animate-pulse" />
             </button>

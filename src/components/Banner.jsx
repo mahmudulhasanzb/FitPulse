@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Flame, ArrowRight, Activity } from 'lucide-react';
+import { Flame, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NumberTicker from './NumberTicker';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // FlipWords component - splits words into letters and animates them with exit effects
 export const FlipWords = ({
@@ -215,7 +216,7 @@ const Banner = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="md:col-span-8 lg:col-span-7 flex flex-col items-start"
+          className="md:col-span-7 lg:col-span-6 flex flex-col items-start"
         >
           {/* Badge */}
           <motion.div 
@@ -254,7 +255,7 @@ const Banner = () => {
             variants={itemVariants}
             className="text-sm sm:text-base md:text-lg text-neutral-light/80 max-w-lg mb-8 leading-relaxed"
           >
-            Join the world's most advanced fitness community. Track every rep,
+            Join the world&apos;s most advanced fitness community. Track every rep,
             crush every goal, and train with elite coaches.
           </motion.p>
 
@@ -306,51 +307,26 @@ const Banner = () => {
           </motion.div>
         </motion.div>
 
-        {/* Decorative Right Column */}
-        <div className="hidden md:col-span-4 lg:col-span-5 relative h-full min-h-[400px] flex items-center justify-center">
-          {/* Floating energetic badge/widget */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1, 
-              y: [0, -12, 0] 
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.9 },
-              scale: { duration: 0.8, delay: 0.9 },
-              y: {
-                duration: 6,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: 1.7
-              }
-            }}
-            whileHover={{ scale: 1.04, borderColor: 'rgba(212, 255, 0, 0.4)' }}
-            className="absolute p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md shadow-2xl transition-colors duration-300 max-w-xs group cursor-default"
+        {/* Decorative Right Column: Large Cutout Athlete */}
+        <div className="hidden md:flex md:col-span-5 lg:col-span-6 relative w-full h-full min-h-[550px] lg:min-h-[660px] items-center justify-center">
+          {/* Radial Spotlight Glow behind athlete */}
+          <div className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
+
+          {/* Large Athlete Cutout Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            className="relative w-full max-w-md lg:max-w-xl xl:max-w-2xl h-[520px] lg:h-[640px] xl:h-[720px] flex items-center justify-center"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2.5 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-black transition-colors duration-300">
-                <Activity className="w-5 h-5 animate-pulse" />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                  Live Training
-                </h4>
-                <p className="text-[10px] text-neutral-light">
-                  542 Active Users Now
-                </p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-primary rounded-full w-3/4 animate-pulse" />
-              </div>
-              <p className="text-xs text-neutral-light/70 leading-normal">
-                Elevate your performance. Join high-intensity live sessions led
-                by master trainers.
-              </p>
-            </div>
+            <Image
+              src="https://i.ibb.co.com/5g6DpCWt/583df501a9e35e7b2e9a1abc5137cfff-removebg-preview.png"
+              alt="FitPulse Elite Athlete"
+              fill
+              priority
+              sizes="(max-width: 1024px) 500px, 680px"
+              className="object-contain object-center transition-transform duration-700 hover:scale-[1.02]"
+            />
           </motion.div>
         </div>
       </div>

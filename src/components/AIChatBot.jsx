@@ -135,7 +135,7 @@ export default function AIChatBot() {
                 <Bot className="w-5 h-5" />
               </div>
               <span className="text-sm font-semibold tracking-wide hidden sm:inline text-foreground">
-                Fipulse Coach AI
+                Coach AI
               </span>
               <Sparkles className="w-4 h-4 text-primary animate-pulse" />
             </button>
@@ -194,8 +194,9 @@ export default function AIChatBot() {
               {messages.map((msg, idx) => {
                 const isUser = msg.role === "user";
                 const messageText = getMessageText(msg);
+                const isLast = idx === messages.length - 1;
 
-                if (!messageText && !isUser) return null;
+                if (!messageText && !isUser && !(isLoading && isLast)) return null;
 
                 return (
                   <div
@@ -225,9 +226,15 @@ export default function AIChatBot() {
                     >
                       {isUser ? (
                         <p className="whitespace-pre-wrap">{messageText}</p>
-                      ) : (
+                      ) : messageText ? (
                         <div className="space-y-1">
                           {renderFormattedText(messageText)}
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 py-1 px-1">
+                          <span className="w-2 h-2 rounded-full bg-primary animate-bounce"></span>
+                          <span className="w-2 h-2 rounded-full bg-primary animate-bounce [animation-delay:0.2s]"></span>
+                          <span className="w-2 h-2 rounded-full bg-primary animate-bounce [animation-delay:0.4s]"></span>
                         </div>
                       )}
                     </div>

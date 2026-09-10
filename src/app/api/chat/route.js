@@ -1,7 +1,6 @@
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { streamText, convertToModelMessages } from 'ai';
 
-// Support both GEMINI_API_KEY and GOOGLE_GENERATIVE_AI_API_KEY
 const google = createGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
@@ -17,11 +16,11 @@ export async function POST(req) {
       );
     }
 
-    // Convert UI messages (with parts) to Model messages format
     const modelMessages = await convertToModelMessages(messages);
 
+    // gemini-3.5-flash-lite has ~1.5s TTFT (vs 5.7s on 3.6-flash thinking model)
     const result = streamText({
-      model: google('gemini-3.6-flash'),
+      model: google('gemini-3.5-flash-lite'),
       system: `You are "FitPulse Coach", an energetic, elite personal trainer and wellness AI assistant built into the FitPulse platform.
 Your goals:
 1. Provide practical, science-backed workout splits, exercise form tips, calorie/macro breakdowns, and recovery advice.
@@ -29,8 +28,8 @@ Your goals:
 3. Maintain an energetic, motivating, and friendly gym coach tone.
 4. Keep responses crisp, well-formatted with bullet points and bold highlights.
 5. Remind users to stay hydrated and warm up properly.
-6. if the user asks to "book a class" or this type of words then instruct him to visit "https://fitpulse-gym-management.vercel.app/classes" for booking a class.
-7. if the user ask any irrelevant question then ignore it and say that "Umm, Actually I am here to help you with your fitness journey, and I think this question "{user_question}" is irrelevant to fitness. So, please ask me anything related to fitness." `,
+6. If the user asks to "book a class" or similar wording, instruct them to visit "https://fitpulse-gym-management.vercel.app/classes" for booking a class.
+7. If the user asks any question irrelevant to fitness, health, workouts, or diet, politely respond: "Umm, Actually I am here to help you with your fitness journey, and I think this question is irrelevant to fitness. So please ask me anything related to fitness."`,
       messages: modelMessages,
     });
 

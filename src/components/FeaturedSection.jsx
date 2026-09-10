@@ -3,12 +3,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import FeaturedClassCard from './FeaturedClassCard';
-
 import { useState, useEffect } from 'react';
 import { getPaginatedClasses } from '@/lib/api/classes/data';
+import FeaturedClassCardSkeleton from './FeaturedClassCardSkeleton';
+
 
 const FeaturedSection = () => {
   const [classCards, setClassCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchClasses = async () => {
@@ -22,20 +24,12 @@ const FeaturedSection = () => {
         setClassCards(data);
       } catch (err) {
         console.error('Failed to fetch classes:', err);
+      } finally {
+        setIsLoading(false)
       }
     };
     fetchClasses();
   }, []);
-
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1 } },
-  };
-
-  const cardContainerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 70, damping: 14 } },
-  };
 
   return (
     <section className="relative bg-bg-dark px-6 md:px-16 py-24 z-10">
@@ -58,21 +52,19 @@ const FeaturedSection = () => {
           </motion.a>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
-          {classCards
-            .slice(0, 3)
-            .map(classItem => (
-              <motion.div key={classItem._id} variants={cardContainerVariants}>
-                <FeaturedClassCard classData={classItem} />
-              </motion.div>
-            ))}
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {isLoading ? (
+            [1, 2, 3].map(n => <FeaturedClassCardSkeleton key={n} />)
+          ) : classCards.length > 0 ? (
+            classCards.slice(0, 3).map(classItem => (
+              <FeaturedClassCard key={classItem._id} classData={classItem} />
+            ))
+          ) : (
+            <div className="col-span-full py-12 text-center text-neutral-light/50 text-sm">
+              No featured classes found.
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

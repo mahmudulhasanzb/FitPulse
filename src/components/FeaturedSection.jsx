@@ -6,6 +6,7 @@ import FeaturedClassCard from './FeaturedClassCard';
 import { useState, useEffect } from 'react';
 import { getPaginatedClasses } from '@/lib/api/classes/data';
 import FeaturedClassCardSkeleton from './FeaturedClassCardSkeleton';
+import { ArrowRight } from 'lucide-react';
 
 
 const FeaturedSection = () => {
@@ -48,7 +49,7 @@ const FeaturedSection = () => {
             whileHover={{ x: 3 }}
             className="inline-flex items-center gap-1 text-sm font-bold text-primary tracking-wider uppercase cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <span>View All</span>
+            <span>View All</span> <ArrowRight className='size-4'/>
           </motion.a>
         </div>
 

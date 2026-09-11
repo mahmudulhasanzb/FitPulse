@@ -41,7 +41,7 @@ const LatestForumPosts = () => {
             whileHover={{ x: 3 }}
             className="inline-flex items-center gap-1 text-sm font-bold text-primary tracking-wider uppercase cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <span>View All</span>
+            <span>View All</span><ArrowRight className='size-4'/>
           </motion.a>
         </div>
 

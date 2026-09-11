@@ -6,7 +6,6 @@ import {
   Bot,
   X,
   Send,
-  Sparkles,
   RotateCcw,
   User,
   Loader2,
@@ -123,21 +122,16 @@ export default function AIChatBot() {
   return (
     <>
       {/* Floating Chat Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-5 right-5 z-50">
         {!isOpen && (
           <div className="relative">
             <button
               onClick={() => setIsOpen(true)}
               aria-label="Open FitPulse AI Chatbot"
-              className="group flex items-center gap-2.5 px-4 py-3 bg-bg-card border-2 border-primary/40 hover:border-primary text-foreground rounded-full shadow-2xl hover:shadow-primary/20 hover:scale-104 active:scale-95 transition-all duration-200 cursor-pointer"
+              title="Open FitPulse AI Chatbot"
+              className="w-11 h-11 sm:w-12 sm:h-12 bg-bg-card/95 backdrop-blur-md border border-primary/40 hover:border-primary text-primary hover:bg-primary hover:text-black rounded-full shadow-xl hover:shadow-primary/30 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center cursor-pointer group"
             >
-              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-colors">
-                <Bot className="w-5 h-5" />
-              </div>
-              <span className="text-sm font-semibold tracking-wide hidden sm:inline text-foreground">
-                Coach AI
-              </span>
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+              <Bot className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
             </button>
           </div>
         )}

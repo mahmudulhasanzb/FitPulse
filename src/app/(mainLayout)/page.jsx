@@ -2,6 +2,7 @@ import Banner from "@/components/Banner";
 import FeaturedSection from "@/components/FeaturedSection";
 import LatestForumPosts from "@/components/LatestForumPosts";
 import RevolutionSection from "@/components/RevolutionSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <FeaturedSection />
       <LatestForumPosts />
       <RevolutionSection />
+      <TestimonialsSection />
       <CTASection />
     </>
   );

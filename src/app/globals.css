@@ -51,3 +51,42 @@ body {
   background-image: radial-gradient(circle at 75% 50%, rgba(212, 255, 0, 0.15) 0%, rgba(212, 255, 0, 0) 55%);
 }
 
+/* Custom marquee animation */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 45s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover .animate-marquee-left,
+.pause-on-hover:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+

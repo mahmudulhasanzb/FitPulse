@@ -62,7 +62,7 @@ const CTASection = () => {
           {/* Heading with character-by-character blur-in animation */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic tracking-tight uppercase text-white mb-6 leading-tight relative z-10 select-none">
             <span className="block mb-2">
-              <BlurInText text="READY TO START YOUR" delayOffset={0.1} />
+              <BlurInText text="GET 50% OFF YOUR FIRST" delayOffset={0.1} />
             </span>
             <span
               style={{
@@ -73,16 +73,14 @@ const CTASection = () => {
               }}
               className="text-primary mt-1"
             >
-              <BlurInText text="TRANSFORMATION?" delayOffset={0.6} />
+              <BlurInText text="TRAINER SESSION" delayOffset={0.6} />
             </span>
           </h2>
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base text-neutral-light/70 max-w-2xl mx-auto mb-10 leading-relaxed relative z-10">
-            Join thousands of others who have already taken the first step
-            towards
-            <br className="hidden sm:inline" />a healthier, stronger version of
-            themselves.
+            Sign up this week to claim half-price booking on any strength, HIIT,
+            or endurance class. Instant discount applied at checkout.
           </p>
 
           {/* CTA Actions */}

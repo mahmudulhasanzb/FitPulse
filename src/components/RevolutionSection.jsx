@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Star } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NumberTicker from './NumberTicker';
 
@@ -337,13 +337,13 @@ const RevolutionSection = () => {
               }}
               className="absolute -bottom-6 -left-4 md:-left-8 p-6 bg-black border border-white/10 rounded-2xl max-w-[280px] shadow-2xl z-20"
             >
-              <Star className="w-5 h-5 text-primary fill-primary mb-3" />
+              <Quote className="w-5 h-5 text-primary mb-3" />
               <p className="text-white text-xs sm:text-sm font-bold italic leading-relaxed mb-3">
-                "The best fitness platform I've ever used. The community is
-                unmatched."
+                "Strength does not come from winning. Your struggles develop your
+                strengths."
               </p>
               <span className="block text-neutral-400 text-[10px] sm:text-xs font-semibold">
-                — James Wilson, Pro Athlete
+                — Arnold Schwarzenegger, 7x Mr. Olympia
               </span>
             </motion.div>
           </div>

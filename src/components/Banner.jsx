@@ -315,18 +315,27 @@ const Banner = () => {
 
         {/* Athlete Column: On Top for Small/Medium (order-1), On Side for Large (order-2) */}
         <div className="order-1 lg:order-2 lg:col-span-5 xl:col-span-6 flex relative w-full items-center justify-center select-none">
-          {/* Neon Radial Spotlight */}
-          <div className="absolute w-72 h-72 sm:w-80 sm:h-80 lg:w-[440px] lg:h-[440px] bg-primary/20 rounded-full blur-[110px] pointer-events-none" />
+          {/* Neon Radial Spotlight (One-time fade-in) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, ease: "easeOut", delay: 0.15 }}
+            className="absolute w-72 h-72 sm:w-80 sm:h-80 lg:w-[440px] lg:h-[440px] bg-primary/20 rounded-full blur-[110px] pointer-events-none"
+          />
 
           {/* Futuristic Concentric Rings Behind Athlete (Static) */}
           <div className="absolute w-64 h-64 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-full border border-primary/20 pointer-events-none" />
           <div className="absolute w-72 h-72 sm:w-96 sm:h-96 lg:w-[480px] lg:h-[480px] rounded-full border border-dashed border-white/10 pointer-events-none" />
 
-          {/* Athlete Cutout Container with Smooth Bottom Dissolve Mask */}
+          {/* Athlete Cutout Container with One-Time Fade-In Entrance & Dissolve Mask */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.94, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            transition={{
+              duration: 1.0,
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.3,
+            }}
             className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-[320px] sm:h-[400px] md:h-[460px] lg:h-[500px] xl:h-[540px] flex items-end justify-center"
             style={{
               maskImage: 'linear-gradient(to bottom, black 65%, transparent 95%)',
@@ -339,7 +348,7 @@ const Banner = () => {
               fill
               priority
               sizes="(max-width: 1024px) 440px, 580px"
-              className="object-contain object-bottom transition-transform duration-700 hover:scale-[1.02]"
+              className="object-contain object-bottom"
             />
           </motion.div>
 

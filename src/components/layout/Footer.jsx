@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-[#0A0D02] border-t border-[#1C210E] pt-16 pb-8 text-[#A4A896]/70 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           {/* Left Side: Brand Details */}
           <div className="col-span-1 md:col-span-6 flex flex-col space-y-5">
             <h2 className="text-white font-black text-2xl tracking-wider select-none">
@@ -20,12 +20,12 @@ const Footer = () => {
             <div className="text-sm text-[#A4A896]/60 space-y-1">
               <p>Email: contact@fitpulse.com</p>
               <p>Phone: +1 (555) 019-9922</p>
-              <p>Address: 100 Fitness Way, San Francisco, CA</p>
+              <p>Address: 100 Fitness Way, Dhaka, Bangladesh</p>
             </div>
             {/* Social Icons */}
             <div className="flex items-center space-x-5 pt-2">
               <a
-                href="#"
+                href="https://x.com/mahmudulhasanzb"
                 className="text-[#A4A896]/60 hover:text-[#D4FF00] transition-colors duration-250 flex items-center justify-center"
                 aria-label="X (formerly Twitter)"
               >
@@ -34,14 +34,14 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://mahmudulhasan-dev.vercel.app"
                 className="text-[#A4A896]/60 hover:text-[#D4FF00] transition-colors duration-250"
                 aria-label="Website"
               >
                 <Globe className="h-5 w-5 stroke-[1.8]" />
               </a>
               <a
-                href="#"
+                href="https://facebook.com/mahmudulhasanzb"
                 className="text-[#A4A896]/60 hover:text-[#D4FF00] transition-colors duration-250"
                 aria-label="Chat"
               >
@@ -150,7 +150,7 @@ const Footer = () => {
           <p className="select-none">
             &copy; {new Date().getFullYear()}{' '}
             <span className="text-[#A4A896] font-semibold italic transition-colors duration-250 hover:cursor-pointer">
-              FitLife Hub
+              FitPulse
             </span>
             . All rights reserved.
           </p>

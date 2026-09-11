@@ -90,6 +90,7 @@ const Navbar = () => {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'All Classes', href: '/classes' },
+    { label: 'Trainers', href: '/trainers' },
     { label: 'Community Forum', href: '/forum-posts' },
   ];
 

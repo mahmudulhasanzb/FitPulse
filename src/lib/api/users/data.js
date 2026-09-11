@@ -9,3 +9,4 @@ export const getTrainers = async () => {
   const res = await serverFetch('/api/trainers');
   return res;
 };
+

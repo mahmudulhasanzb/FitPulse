@@ -251,11 +251,13 @@ const ForumPostDetailsClient = ({ post, postId }) => {
             {comments.map(comment => (
               <div key={comment._id} className="bg-[#13160B] border border-[#1C210E] rounded-2xl p-5">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#282F18] overflow-hidden flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-[#282F18] overflow-hidden flex-shrink-0 flex items-center justify-center">
                     {comment.userImage ? (
                       <Image src={comment.userImage} alt="" width={32} height={32} className="w-full h-full object-cover" />
                     ) : (
-                      <User className="h-4 w-4 text-[#A4A896] m-2" />
+                      <span className="text-xs font-black text-[#D4FF00] font-mono">
+                        {comment.userName?.charAt(0)?.toUpperCase() || 'U'}
+                      </span>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">

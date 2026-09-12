@@ -3,13 +3,30 @@ import ForumPostsFilter from '@/components/forms/ForumPostsFilter';
 import ForumPostCard from '@/components/cards/ForumPostCard';
 import PaginationControls from '@/components/ui/Pagination';
 import { getPaginatedForumPosts } from '@/lib/api/forum/data';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 export const revalidate = 60;
 
 const ForumPosts = async ({ searchParams }) => {
-  const { page } = await searchParams;
+  const { page, search, category, sort } = (await searchParams) || {};
   const currentPage = Number(page) || 1;
-  const forumResponse = await getPaginatedForumPosts(currentPage);
+
+  const [forumResponse, session] = await Promise.all([
+    getPaginatedForumPosts({
+      page: currentPage,
+      search: search || '',
+      category: category || '',
+      sort: sort || 'latest',
+    }),
+    auth.api
+      .getSession({
+        headers: await headers(),
+      })
+      .catch(() => null),
+  ]);
+
+  const role = session?.user?.role;
 
   // Handle both new {data, page, totalPage} shape and legacy plain array
   const postsData = Array.isArray(forumResponse)
@@ -23,7 +40,7 @@ const ForumPosts = async ({ searchParams }) => {
     <div className="bg-[#0A0D02] min-h-screen text-white px-6 py-10 md:px-12 md:py-16 font-sans">
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Sort, Search, Classification Filters Header */}
-        <ForumPostsFilter />
+        <ForumPostsFilter session={session} role={role} />
 
         {/* Row-Based Vertical Cards List */}
         <div className="flex flex-col gap-6">

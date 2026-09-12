@@ -19,17 +19,14 @@ const ForumPostCard = ({ post }) => {
   
   const timeAgo = getTimeAgo(rawDate);
 
-  // Generate hash-based numbers for comments/likes if empty to look dynamic and match mockup design
-  const getSimulatedStats = (title) => {
-    if (!title) return { comments: 12, likes: 45 };
-    const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return {
-      comments: post.commentCount?.length || (hash % 38) + 8,
-      likes: post.likes?.length || (hash % 180) + 40
-    };
-  };
+  // Real counts directly from database
+  const commentsCount = typeof post.commentCount === 'number'
+    ? post.commentCount
+    : (Array.isArray(post.commentCount) ? post.commentCount.length : 0);
 
-  const stats = getSimulatedStats(post.title);
+  const likesCount = Array.isArray(post.likes)
+    ? post.likes.length
+    : (typeof post.likes === 'number' ? post.likes : 0);
 
   // Styling helpers for role badges 
   const badge =
@@ -111,11 +108,11 @@ const ForumPostCard = ({ post }) => {
           <div className="flex items-center gap-4 text-[10px] text-[#A4A896]/65 font-bold font-mono">
             <div className="flex items-center gap-1.5 hover:text-white transition-colors duration-150 cursor-pointer">
               <MessageSquare className="h-4 w-4 text-[#A4A896]/45" />
-              <span>{stats.comments}</span>
+              <span>{commentsCount}</span>
             </div>
             <div className="flex items-center gap-1.5 hover:text-red-400 transition-colors duration-150 cursor-pointer">
               <Heart className="h-4 w-4 text-[#A4A896]/45 group-hover:text-red-500/20" />
-              <span>{stats.likes}</span>
+              <span>{likesCount}</span>
             </div>
           </div>
 

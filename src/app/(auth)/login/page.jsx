@@ -2,38 +2,38 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const router = useRouter()
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async data => {
-    console.log(data);
-
-    const { data: response, error} = await authClient.signIn.email({
-      email: data.email,
-      password: data.password,
-    }, {
-      onSuccess: () => {
-        toast.success('Logedin successfully')
-        router.push("/")
+    const { data: response, error } = await authClient.signIn.email(
+      {
+        email: data.email,
+        password: data.password,
       },
-      onError: ({error}) => {
-        toast.error(error.message)
-        return
-      }
-    })
+      {
+        onSuccess: () => {
+          toast.success('Logged in successfully');
+          router.push('/');
+        },
+        onError: ({ error }) => {
+          toast.error(error?.message || 'Sign in failed');
+        },
+      },
+    );
   };
 
   const handleGoogleSignIn = async () => {
@@ -56,7 +56,6 @@ export default function LoginPage() {
           <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             Sign In
           </h2>
-          
           <p className="text-[#A4A896]/60 text-sm mt-1.5 font-medium">
             Welcome back. Enter your credentials to access your dashboard.
           </p>
@@ -96,7 +95,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2  text-black/50 hover:text-black cursor-pointer"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white cursor-pointer"
               >
                 {showPassword ? (
                   <EyeOff className="w-4 h-4" />
@@ -115,9 +114,17 @@ export default function LoginPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-[#D4FF00] hover:bg-[#c2eb00] text-[#121212] font-black text-sm uppercase py-4 rounded-xl cursor-pointer shadow-lg shadow-[#D4FF00]/10 hover:shadow-[#D4FF00]/25 transition-all duration-200 transform active:scale-98"
+            disabled={isSubmitting}
+            className="w-full bg-[#D4FF00] hover:bg-[#c2eb00] disabled:opacity-50 text-[#121212] font-black text-sm uppercase py-4 rounded-xl cursor-pointer shadow-lg shadow-[#D4FF00]/10 hover:shadow-[#D4FF00]/25 transition-all duration-200 transform active:scale-98 flex items-center justify-center gap-2"
           >
-            Sign In
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin text-[#121212]" />
+                <span>Signing In...</span>
+              </>
+            ) : (
+              'Sign In'
+            )}
           </button>
 
           {/* Divider */}
@@ -130,13 +137,12 @@ export default function LoginPage() {
             </span>
           </div>
 
-          {/* Google Signup Button */}
+          {/* Google Sign In Button */}
           <button
             onClick={handleGoogleSignIn}
             type="button"
             className="w-full bg-[#14180A] hover:bg-[#1C210E] border border-[#282F18] text-white font-extrabold text-xs uppercase py-3.5 rounded-xl cursor-pointer flex items-center justify-center gap-2.5 transition-all duration-200"
           >
-            {/* Custom Google Icon SVG */}
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.187 4.114-3.478 0-6.3-2.822-6.3-6.3s2.822-6.3 6.3-6.3c1.63 0 3.106.625 4.22 1.642l3.085-3.085C19.04 2.5 15.9 1 12.24 1 6.033 1 1 6.033 1 12.24s5.033 11.24 11.24 11.24c5.897 0 10.866-4.188 10.866-11.24 0-.768-.078-1.516-.216-2.24H12.24z" />
             </svg>

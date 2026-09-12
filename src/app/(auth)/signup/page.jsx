@@ -16,7 +16,7 @@ import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-export default  function SignupPage() {
+export default function SignupPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);

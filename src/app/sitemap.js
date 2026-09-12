@@ -2,7 +2,8 @@ export const revalidate = 3600;
 
 export default async function sitemap() {
   const siteUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || 'https://fit-pulse-gym.vercel.app';
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    'https://fitpulse-gym-management.vercel.app';
   const now = new Date();
 
   // Core public routes

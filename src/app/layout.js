@@ -15,7 +15,9 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fit-pulse-gym.vercel.app';
+const siteUrl =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  'https://fitpulse-gym-management.vercel.app';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),

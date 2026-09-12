@@ -26,7 +26,7 @@ export const metadata = {
     template: '%s | FitPulse',
   },
   description:
-    'FitPulse is an elite fitness and wellness ecosystem featuring certified instructors, curated training classes, and an active fitness community. Engineered by Mahmudul Hasan.',
+    'FitPulse is an elite fitness platform with certified instructors, training classes, and an active community. Engineered by Mahmudul Hasan.',
   applicationName: 'FitPulse',
   authors: [
     {
@@ -70,13 +70,13 @@ export const metadata = {
     siteName: 'FitPulse',
     title: 'FitPulse | High-Performance Fitness Platform & Community',
     description:
-      'Professional fitness ecosystems designed for elite athletes and motivated beginners alike. Developed by Mahmudul Hasan.',
+      'FitPulse is an elite fitness platform with certified instructors, training classes, and an active community. Engineered by Mahmudul Hasan.',
     images: [
       {
-        url: '/favicon.ico',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'FitPulse Fitness Platform',
+        alt: 'FitPulse - High-Performance Fitness Platform Engineered by Mahmudul Hasan',
       },
     ],
   },
@@ -84,7 +84,8 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'FitPulse | High-Performance Fitness Platform',
     description:
-      'Engineered by Mahmudul Hasan. Explore elite training sessions and fitness forum.',
+      'FitPulse is an elite fitness platform with certified instructors and active community. Engineered by Mahmudul Hasan.',
+    images: ['/og-image.jpg'],
     creator: '@mahmudulhasanzb',
   },
 };

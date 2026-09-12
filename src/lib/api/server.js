@@ -1,8 +1,11 @@
 import { baseUrl } from "./baseUrl"
 
-export const serverFetch = async (path) => {
+export const serverFetch = async (path, options = {}) => {
   const formattedPath = path.startsWith('/') ? path : `/${path}`;
-  const res = await fetch(`${baseUrl}${formattedPath}`, { cache: 'no-store' });
+  const res = await fetch(`${baseUrl}${formattedPath}`, {
+    next: { revalidate: 60 },
+    ...options,
+  });
   
   if (!res.ok) {
     console.error(`Fetch error: ${res.status} ${res.statusText} for ${formattedPath}`);

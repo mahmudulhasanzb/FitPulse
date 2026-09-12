@@ -4,7 +4,7 @@ import ForumPostCard from '@/components/cards/ForumPostCard';
 import PaginationControls from '@/components/ui/Pagination';
 import { getPaginatedForumPosts } from '@/lib/api/forum/data';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 const ForumPosts = async ({ searchParams }) => {
   const { page } = await searchParams;

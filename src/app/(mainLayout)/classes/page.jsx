@@ -3,7 +3,7 @@ import FilterClasses from '@/components/forms/FilterClasses';
 import PaginationControls from '@/components/ui/Pagination';
 import { baseUrl } from '@/lib/api/baseUrl';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 const AllClassesPage = async ({ searchParams }) => {
   const params = await searchParams;
@@ -15,7 +15,9 @@ const AllClassesPage = async ({ searchParams }) => {
   if (search) query.set('search', search);
   if (category) query.set('category', category);
 
-  const res = await fetch(`${baseUrl}/api/classes?${query.toString()}`);
+  const res = await fetch(`${baseUrl}/api/classes?${query.toString()}`, {
+    next: { revalidate: 60 },
+  });
   const allClasses = await res.json();
   const totalPage = allClasses.totalPage ?? 1;
   const classesData = Array.isArray(allClasses.data) ? allClasses.data : [];

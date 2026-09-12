@@ -1,6 +1,6 @@
 import React from 'react';
 import { getTrainers } from '@/lib/api/users/data';
-import TrainerCard from '@/components/TrainerCard';
+import TrainerCard from '@/components/cards/TrainerCard';
 
 export const dynamic = 'force-dynamic';
 

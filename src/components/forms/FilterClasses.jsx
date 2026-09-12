@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ClassCard from '@/components/ClassCard';
+import ClassCard from '@/components/cards/ClassCard';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 const FilterClasses = ({ allClasses = [], currentSearch = '', currentCategory = '' }) => {

@@ -1,5 +1,5 @@
-import ClassDetails from '@/components/ClassDetails';
-import RecommendedClasses from '@/components/RecommendedClasses';
+import ClassDetails from '@/components/shared/ClassDetails';
+import RecommendedClasses from '@/components/shared/RecommendedClasses';
 import { getClassById } from '@/lib/api/classes/data';
 import React from 'react';
 import { auth } from '@/lib/auth';

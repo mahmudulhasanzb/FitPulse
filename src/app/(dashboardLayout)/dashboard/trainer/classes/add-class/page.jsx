@@ -1,4 +1,4 @@
-import AddNewClass from "@/components/AddNewClass";
+import AddNewClass from "@/components/forms/AddNewClass";
 import { Plus } from "lucide-react";
 
 const AddNewClassesPage = () => {

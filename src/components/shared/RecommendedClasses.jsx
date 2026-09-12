@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAllClass } from '@/lib/api/classes/data';
-import ClassCard from './ClassCard';
+import ClassCard from '@/components/cards/ClassCard';
 
 const RecommendedClasses = async ({ category, currentClassId }) => {
   if (!category) return null;

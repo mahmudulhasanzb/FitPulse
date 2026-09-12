@@ -1,7 +1,7 @@
 import React from 'react';
-import ForumPostsFilter from '@/components/ForumPostsFilter';
-import ForumPostCard from '@/components/ForumPostCard';
-import PaginationControls from '@/components/Pagination';
+import ForumPostsFilter from '@/components/forms/ForumPostsFilter';
+import ForumPostCard from '@/components/cards/ForumPostCard';
+import PaginationControls from '@/components/ui/Pagination';
 import { getPaginatedForumPosts } from '@/lib/api/forum/data';
 
 export const dynamic = 'force-dynamic';

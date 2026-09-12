@@ -9,8 +9,8 @@ import {
 import { getClassByEmail } from '@/lib/api/classes/data';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import DeleteModal from '@/components/DeleteClassModal';
-import EditClassModal from '@/components/EditClassModal';
+import DeleteModal from '@/components/modals/DeleteClassModal';
+import EditClassModal from '@/components/modals/EditClassModal';
 
 const MyClasses = async () => {
 const session = await auth.api.getSession({

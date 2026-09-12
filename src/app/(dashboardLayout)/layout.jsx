@@ -1,4 +1,4 @@
-import DashboardSideBar from '@/components/DashboardSideBar';
+import DashboardSideBar from '@/components/layout/DashboardSideBar';
 import Footer from '@/components/layout/Footer';
 
 const DashboardLayout = ({ children }) => {

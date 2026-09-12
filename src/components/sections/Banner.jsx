@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Flame, ArrowRight, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import NumberTicker from './NumberTicker';
+import NumberTicker from '@/components/ui/NumberTicker';
 import Link from 'next/link';
 import Image from 'next/image';
 

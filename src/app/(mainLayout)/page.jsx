@@ -1,9 +1,9 @@
-import Banner from "@/components/Banner";
-import FeaturedSection from "@/components/FeaturedSection";
-import LatestForumPosts from "@/components/LatestForumPosts";
-import RevolutionSection from "@/components/RevolutionSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import CTASection from "@/components/CTASection";
+import Banner from "@/components/sections/Banner";
+import FeaturedSection from "@/components/sections/FeaturedSection";
+import LatestForumPosts from "@/components/sections/LatestForumPosts";
+import RevolutionSection from "@/components/sections/RevolutionSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import CTASection from "@/components/sections/CTASection";
 
 export default function Home() {
   return (

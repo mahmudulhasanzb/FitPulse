@@ -1,4 +1,4 @@
-import MyForumPostCard from '@/components/MyForumPostCard';
+import MyForumPostCard from '@/components/cards/MyForumPostCard';
 import { getMyForumPosts } from '@/lib/api/forum/data';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';

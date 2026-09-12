@@ -1,4 +1,4 @@
-import AddNewForumPost from '@/components/AddNewForumPost';
+import AddNewForumPost from '@/components/forms/AddNewForumPost';
 
 const AddForumPostPage = () => {
   return (

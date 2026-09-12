@@ -1,6 +1,6 @@
 import React from 'react';
-import FilterClasses from '@/components/FilterClasses';
-import PaginationControls from '@/components/Pagination';
+import FilterClasses from '@/components/forms/FilterClasses';
+import PaginationControls from '@/components/ui/Pagination';
 import { baseUrl } from '@/lib/api/baseUrl';
 
 export const dynamic = 'force-dynamic';

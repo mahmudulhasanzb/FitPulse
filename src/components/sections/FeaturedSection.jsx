@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import FeaturedClassCard from './FeaturedClassCard';
+import FeaturedClassCard from '@/components/cards/FeaturedClassCard';
 import { useState, useEffect } from 'react';
 import { getPaginatedClasses } from '@/lib/api/classes/data';
-import FeaturedClassCardSkeleton from './FeaturedClassCardSkeleton';
+import FeaturedClassCardSkeleton from '@/components/cards/FeaturedClassCardSkeleton';
 import { ArrowRight } from 'lucide-react';
 
 

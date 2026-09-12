@@ -1,5 +1,5 @@
 import React from 'react';
-import FeaturedClassCardSkeleton from '@/components/FeaturedClassCardSkeleton';
+import FeaturedClassCardSkeleton from '@/components/cards/FeaturedClassCardSkeleton';
 
 export default function Loading() {
   return (

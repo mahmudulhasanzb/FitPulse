@@ -6,7 +6,7 @@ import { MessageSquare, Heart, ArrowRight, User } from 'lucide-react';
 import Link from 'next/link';
 import { getPaginatedForumPosts } from '@/lib/api/forum/data';
 import Image from 'next/image';
-import ForumPostSkeleton from './ForumPostSkeleton';
+import ForumPostSkeleton from '@/components/cards/ForumPostSkeleton';
 
 const LatestForumPosts = () => {
   const [posts, setPosts] = useState([]);

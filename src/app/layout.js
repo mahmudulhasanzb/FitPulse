@@ -3,7 +3,7 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from 'react-hot-toast';
-import AIChatBot from '@/components/AIChatBot';
+import AIChatBot from '@/components/ui/AIChatBot';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

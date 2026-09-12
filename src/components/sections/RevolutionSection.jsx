@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
-import NumberTicker from './NumberTicker';
+import NumberTicker from '@/components/ui/NumberTicker';
 
 const RevolutionSection = () => {
   // Stagger animation container

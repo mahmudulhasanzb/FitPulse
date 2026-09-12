@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Eye, Trash2 } from 'lucide-react';
 import { deleteForumPost } from '@/lib/api/forum/action';
 import Image from 'next/image';
-import ForumPostEditModal from './ForumPostEditModal';
+import ForumPostEditModal from '@/components/modals/ForumPostEditModal';
 
 const MyForumPostCard = ({ post }) => {
   const formattedDate = post.createdAt

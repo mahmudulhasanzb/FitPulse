@@ -5,6 +5,17 @@ import { baseUrl } from '@/lib/api/baseUrl';
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: 'Explore Training Classes',
+  description:
+    'High-performance fitness classes led by certified trainers. Filter by category, difficulty, and workout goals.',
+  openGraph: {
+    title: 'Explore Training Classes | FitPulse',
+    description:
+      'High-performance fitness classes led by certified trainers. Filter by category, difficulty, and workout goals.',
+  },
+};
+
 const AllClassesPage = async ({ searchParams }) => {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;

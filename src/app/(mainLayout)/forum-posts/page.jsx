@@ -8,6 +8,17 @@ import { headers } from 'next/headers';
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: 'Community Forum',
+  description:
+    'Join discussions on training regimes, fitness questions, and nutrition tips curated by FitPulse instructors and community.',
+  openGraph: {
+    title: 'Community Forum | FitPulse',
+    description:
+      'Engage with elite trainers and athlete discussions on FitPulse Community.',
+  },
+};
+
 const ForumPosts = async ({ searchParams }) => {
   const { page, search, category, sort } = (await searchParams) || {};
   const currentPage = Number(page) || 1;
